@@ -1,0 +1,97 @@
+backend:
+  name: github
+  repo: parriauxmaxime/bitcrusher-studio
+  branch: main
+  base_url: https://bitcrusher-oauth.<your-subdomain>.workers.dev
+  auth_endpoint: auth
+
+media_folder: public/media
+public_folder: /media
+
+i18n:
+  structure: multiple_folders
+  locales: [fr, en, es]
+  default_locale: fr
+
+collections:
+  - name: site
+    label: Site copy
+    files:
+      - name: fr
+        label: Français
+        file: content/site/fr.yml
+        format: yaml
+        fields: &site_fields
+          - { name: nav, widget: object, fields: [
+              { name: home, widget: string },
+              { name: about, widget: string },
+              { name: works, widget: string }
+            ]}
+          - { name: footer, widget: object, fields: [
+              { name: email, widget: string },
+              { name: copyright, widget: string },
+              { name: socials, widget: list, fields: [
+                  { name: kind, widget: select, options: [soundcloud, youtube, linkedin] },
+                  { name: url, widget: string },
+                  { name: label, widget: string }
+                ]}
+            ]}
+          - { name: seo, widget: object, fields: [
+              { name: site_name, widget: string },
+              { name: tagline, widget: string }
+            ]}
+      - name: en
+        label: English
+        file: content/site/en.yml
+        format: yaml
+        fields: *site_fields
+      - name: es
+        label: Español
+        file: content/site/es.yml
+        format: yaml
+        fields: *site_fields
+
+  - name: pages
+    label: Pages
+    i18n: true
+    folder: content/pages
+    path: "{{locale}}/{{slug}}"
+    extension: md
+    format: frontmatter
+    create: true
+    fields:
+      - { name: title, widget: string, i18n: true }
+      - { name: description, widget: string, i18n: true }
+      - { name: og_image, widget: image, required: false, i18n: duplicate }
+      - { name: body, widget: markdown, i18n: true }
+
+  - name: projects
+    label: Projects
+    i18n: true
+    folder: content/projects
+    path: "{{locale}}/{{slug}}"
+    extension: md
+    format: frontmatter
+    create: true
+    fields:
+      - { name: slug, widget: string, i18n: duplicate }
+      - { name: title, widget: string, i18n: true }
+      - { name: order, widget: number, i18n: duplicate }
+      - { name: featured, widget: boolean, default: false, i18n: duplicate }
+      - { name: year, widget: number, i18n: duplicate }
+      - { name: roles, widget: select, multiple: true, i18n: duplicate,
+          options: [sound_design, music_composition, mixing, mastering, integration] }
+      - { name: tags, widget: list, default: [], i18n: duplicate }
+      - { name: cover, widget: image, i18n: duplicate }
+      - { name: audio, widget: list, default: [], i18n: duplicate, fields: [
+          { name: kind, widget: select, options: [file, soundcloud, youtube] },
+          { name: src, widget: string, required: false },
+          { name: url, widget: string, required: false },
+          { name: title, widget: string }
+        ]}
+      - { name: links, widget: list, default: [], i18n: duplicate, fields: [
+          { name: label, widget: string },
+          { name: url, widget: string }
+        ]}
+      - { name: collaborators, widget: list, default: [], i18n: duplicate }
+      - { name: body, widget: markdown, i18n: true }
