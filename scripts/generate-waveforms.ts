@@ -2,7 +2,7 @@ import { createHash } from "node:crypto";
 import { existsSync } from "node:fs";
 import { readdir, readFile, stat, writeFile } from "node:fs/promises";
 import { extname, join, relative } from "node:path";
-import { AudioContext } from "node-web-audio-api";
+import { OfflineAudioContext } from "node-web-audio-api";
 
 const MEDIA_ROOT = join(process.cwd(), "public/media");
 const CACHE_PATH = join(MEDIA_ROOT, ".peaks-cache.json");
@@ -59,7 +59,7 @@ const loadCache = async (): Promise<Cache> => {
 const run = async () => {
 	const cache = await loadCache();
 	const files = await walkAudio(MEDIA_ROOT);
-	const ctx = new AudioContext({ sampleRate: 44100 });
+	const ctx = new OfflineAudioContext(1, 1, 44100);
 	let rebuilt = 0;
 
 	for (const file of files) {
