@@ -36,7 +36,20 @@ const resolveRoute = () => {
 
 export const Root = () => {
 	const [ready, setReady] = useState(false);
-	const [route] = useState(() => resolveRoute());
+	const [route, setRoute] = useState(() => resolveRoute());
+
+	// Soft redirect from root splash to detected locale
+	useEffect(() => {
+		if (route.kind !== RouteKindEnum.root_splash) return;
+		const lang = (navigator.language || "fr").toLowerCase();
+		const pick: LocaleEnum = lang.startsWith("en")
+			? "en"
+			: lang.startsWith("es")
+				? "es"
+				: "fr";
+		window.history.replaceState(null, "", `/${pick}/`);
+		setRoute({ path: `/${pick}`, kind: RouteKindEnum.home, locale: pick });
+	}, [route.kind]);
 
 	useEffect(() => {
 		const locale = route.locale ?? DEFAULT_LOCALE;
