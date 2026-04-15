@@ -24,6 +24,7 @@
 			"!**/.rsbuild",
 			"!**/coverage",
 			"!.superpowers",
+			"!.claude",
 			"!docs",
 			"!_wayback",
 			"!src/content/generated.ts"
