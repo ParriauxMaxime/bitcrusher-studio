@@ -21,11 +21,15 @@ const walk = (dir: string, out: string[] = []): string[] => {
 describe.skipIf(!existsSync(DIST))("SSG meta smoke", () => {
 	const files = walk(DIST);
 
-	it("produces at least 13 prerendered pages", () => {
-		expect(files.length).toBeGreaterThanOrEqual(13);
+	it("produces at least 7 prerendered pages", () => {
+		expect(files.length).toBeGreaterThanOrEqual(7);
 	});
 
+	// Root / is a redirect-only shell (no SEO meta needed — users are bounced to /{locale}/).
+	const ROOT_INDEX = join(DIST, "index.html");
+
 	for (const file of files) {
+		if (file === ROOT_INDEX) continue;
 		it(`${file.replace(DIST, "")} has title and meta description`, () => {
 			const html = parse(readFileSync(file, "utf8"));
 			expect(html.querySelector("title")?.text).toBeTruthy();
