@@ -1,6 +1,6 @@
 backend:
   name: github
-  repo: parriauxmaxime/bitcrusher-studio
+  repo: ParriauxMaxime/bitcrusher-studio
   branch: main
   base_url: https://bitcrusher-oauth.<your-subdomain>.workers.dev
   auth_endpoint: auth
