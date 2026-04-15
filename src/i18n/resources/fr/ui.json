@@ -13,6 +13,7 @@
 	},
 	"works": {
 		"title": "Projets",
+		"selection": "SÉLECTION",
 		"empty": "Aucun projet pour le moment."
 	}
 }

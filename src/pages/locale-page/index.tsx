@@ -173,7 +173,7 @@ export const LocalePage = ({
 
 			<section css={styles.section} id="works" aria-labelledby="works-heading">
 				<div css={styles.sectionLabel}>
-					— SÉLECTION · {String(projects.length).padStart(2, "0")}
+					— {t("works.selection")} · {String(projects.length).padStart(2, "0")}
 				</div>
 				<h2 id="works-heading" css={styles.worksTitle}>
 					{site.nav.works}

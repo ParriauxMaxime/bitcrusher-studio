@@ -13,6 +13,7 @@
 	},
 	"works": {
 		"title": "Works",
+		"selection": "SELECTION",
 		"empty": "No works yet."
 	}
 }
