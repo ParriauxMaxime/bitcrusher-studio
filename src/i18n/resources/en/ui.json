@@ -1,0 +1,18 @@
+{
+	"common": {
+		"language": "Language",
+		"theme": "Theme",
+		"open_external": "Open externally",
+		"play": "Play",
+		"pause": "Pause",
+		"close": "Close"
+	},
+	"home": {
+		"featured_title": "Featured Works",
+		"view_all": "View all works"
+	},
+	"works": {
+		"title": "Works",
+		"empty": "No works yet."
+	}
+}

@@ -1,0 +1,18 @@
+{
+	"common": {
+		"language": "Langue",
+		"theme": "Thème",
+		"open_external": "Ouvrir en externe",
+		"play": "Lecture",
+		"pause": "Pause",
+		"close": "Fermer"
+	},
+	"home": {
+		"featured_title": "Projets marquants",
+		"view_all": "Voir tous les projets"
+	},
+	"works": {
+		"title": "Projets",
+		"empty": "Aucun projet pour le moment."
+	}
+}
