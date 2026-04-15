@@ -7,7 +7,7 @@
 		"dev": "npm-run-all --parallel dev:content dev:rsbuild",
 		"dev:rsbuild": "rsbuild dev --open",
 		"dev:content": "tsx scripts/sync-content-types.ts --watch",
-		"build": "tsx scripts/prebuild.ts && rsbuild build && tsx scripts/postbuild.ts",
+		"build": "tsx scripts/prebuild.ts && rsbuild build && tsx scripts/postbuild.ts && tsx scripts/emit-sitemap.ts",
 		"check": "biome check .",
 		"check:fix": "biome check --fix .",
 		"typecheck": "tsc --noEmit -p tsconfig.json",
