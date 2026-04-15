@@ -67,15 +67,48 @@ const renderRoute = async (routePath: string): Promise<string> => {
 	return renderToString(renderSSR({ routePath }));
 };
 
+/** Hoist <title> and <meta name="description"> from body HTML into <head>. */
+const hoistHeadTags = (template: string, bodyHtml: string): string => {
+	// Extract <title>…</title>
+	const titleMatch = bodyHtml.match(/<title>([^<]*)<\/title>/);
+	// Extract <meta name="description" content="…"/>
+	const descMatch = bodyHtml.match(
+		/<meta name="description" content="([^"]*)"\s*\/>/,
+	);
+
+	let out = template;
+
+	if (titleMatch) {
+		// Replace the placeholder <title> in the template head
+		out = out.replace(
+			/<title>[^<]*<\/title>/,
+			`<title>${titleMatch[1]}</title>`,
+		);
+	}
+
+	if (descMatch) {
+		// Inject description before </head> if not already present
+		if (!out.includes('meta name="description"')) {
+			out = out.replace(
+				"</head>",
+				`<meta name="description" content="${descMatch[1]}" /></head>`,
+			);
+		}
+	}
+
+	return out;
+};
+
 const writeHtml = async (
 	routePath: string,
 	template: string,
 ): Promise<void> => {
 	const bodyHtml = await renderRoute(routePath);
-	const final = template.replace(
+	const withBody = template.replace(
 		/<div id="root">[\s\S]*?<\/div>/,
 		`<div id="root">${bodyHtml}</div>`,
 	);
+	const final = hoistHeadTags(withBody, bodyHtml);
 	const outDir = routePath === "/" ? DIST : join(DIST, routePath);
 	await mkdir(outDir, { recursive: true });
 	const outFile = join(outDir, "index.html");

@@ -2,6 +2,10 @@ import { css } from "@emotion/react";
 import { ALL_LOCALES } from "@/content/types";
 import { tokens } from "@/theme/tokens";
 
+const SPLASH_TITLE = "Bitcrusher Studio — Sound Designer";
+const SPLASH_DESCRIPTION =
+	"Musique & Sound Design pour post-production audiovisuelle et jeux vidéo · Music & Sound Design for audiovisual post-production and video games";
+
 const styles = {
 	container: css`
 		min-height: 100vh;
@@ -57,29 +61,32 @@ const TAGLINES: Record<string, string> = {
 };
 
 export const RootSplash = () => (
-	<div css={styles.container}>
-		<div css={styles.card}>
-			<h1 css={styles.brand}>
-				Bitcrusher <em>Studio</em>
-			</h1>
-			<p css={styles.tagline}>
-				{TAGLINES.fr}
-				<br />
-				{TAGLINES.en}
-				<br />
-				{TAGLINES.es}
-			</p>
-			<nav css={styles.links} aria-label="Language">
-				{ALL_LOCALES.map((loc) => (
-					<a key={loc} href={`/${loc}/`} hrefLang={loc}>
-						{loc === "fr" ? "Français" : loc === "en" ? "English" : "Español"}
-					</a>
-				))}
-			</nav>
-			<script
-				// biome-ignore lint/security/noDangerouslySetInnerHtml: inline redirect
-				dangerouslySetInnerHTML={{
-					__html: `
+	<>
+		<title>{SPLASH_TITLE}</title>
+		<meta name="description" content={SPLASH_DESCRIPTION} />
+		<div css={styles.container}>
+			<div css={styles.card}>
+				<h1 css={styles.brand}>
+					Bitcrusher <em>Studio</em>
+				</h1>
+				<p css={styles.tagline}>
+					{TAGLINES.fr}
+					<br />
+					{TAGLINES.en}
+					<br />
+					{TAGLINES.es}
+				</p>
+				<nav css={styles.links} aria-label="Language">
+					{ALL_LOCALES.map((loc) => (
+						<a key={loc} href={`/${loc}/`} hrefLang={loc}>
+							{loc === "fr" ? "Français" : loc === "en" ? "English" : "Español"}
+						</a>
+					))}
+				</nav>
+				<script
+					// biome-ignore lint/security/noDangerouslySetInnerHtml: inline redirect
+					dangerouslySetInnerHTML={{
+						__html: `
 (function(){
   try {
     var lang = (navigator.language || 'fr').toLowerCase();
@@ -90,8 +97,9 @@ export const RootSplash = () => (
   } catch(e) {}
 })();
 `,
-				}}
-			/>
+					}}
+				/>
+			</div>
 		</div>
-	</div>
+	</>
 );
