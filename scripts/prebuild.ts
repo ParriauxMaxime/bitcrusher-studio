@@ -6,7 +6,11 @@ const steps: Array<{ name: string; cmd: string; args: string[] }> = [
 		cmd: "npx",
 		args: ["tsx", "scripts/sync-content-types.ts"],
 	},
-	// generate-waveforms, generate-og-images — added in Phase 4 / 5
+	{
+		name: "waveforms",
+		cmd: "npx",
+		args: ["tsx", "scripts/generate-waveforms.ts"],
+	},
 ];
 
 for (const step of steps) {
