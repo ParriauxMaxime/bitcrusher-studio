@@ -1,0 +1,20 @@
+nav:
+  home: Inicio
+  about: Sobre mí
+  works: Trabajos
+footer:
+  email: contact@bitcrusher-studio.com
+  copyright: © 2026 Bitcrusher Studio · Todos los derechos reservados
+  socials:
+    - kind: soundcloud
+      url: https://soundcloud.com/user-836588138
+      label: SoundCloud
+    - kind: youtube
+      url: https://youtube.com/playlist?list=PLL6AYm1TFMrcIqQv9stuyjAoS_-UK4zD4
+      label: YouTube
+    - kind: linkedin
+      url: https://www.linkedin.com/in/quentin-ferreira-castiço
+      label: LinkedIn
+seo:
+  site_name: Bitcrusher Studio
+  tagline: Música y Diseño de Sonido para Postproducción Audiovisual y Videojuegos
