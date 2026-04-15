@@ -1,5 +1,6 @@
 import { css } from "@emotion/react";
 import { useTranslation } from "react-i18next";
+import { ProjectCard } from "@/components/project-card/project-card";
 import type { LocaleEnum, Page, Project } from "@/content/types";
 import { tokens } from "@/theme/tokens";
 
@@ -38,26 +39,6 @@ const styles = {
 		grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
 		gap: 20px;
 	`,
-	card: css`
-		border: 1px solid ${tokens.surface.border};
-		padding: 20px;
-		border-radius: 6px;
-		text-decoration: none;
-		color: ${tokens.text.heading};
-		display: flex;
-		flex-direction: column;
-		gap: 6px;
-		&:hover {
-			border-color: ${tokens.accent};
-		}
-	`,
-	cardMeta: css`
-		font-family: "JetBrains Mono", ui-monospace, monospace;
-		font-size: 10px;
-		letter-spacing: 0.2em;
-		text-transform: uppercase;
-		color: ${tokens.text.muted};
-	`,
 };
 
 export interface HomeProps {
@@ -82,16 +63,12 @@ export const Home = ({ locale, page, featured }: HomeProps) => {
 				</h2>
 				<div css={styles.grid}>
 					{featured.map((p) => (
-						<a
+						<ProjectCard
 							key={p.slug}
+							project={p}
+							variant="link"
 							href={`/${locale}/works?project=${p.slug}`}
-							css={styles.card}
-						>
-							<div css={styles.cardMeta}>
-								{p.year} · {p.roles.join(" · ")}
-							</div>
-							<div>{p.title}</div>
-						</a>
+						/>
 					))}
 				</div>
 			</section>
