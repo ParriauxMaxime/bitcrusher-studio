@@ -1,0 +1,12 @@
+node_modules/
+dist/
+.rsbuild/
+coverage/
+.superpowers/
+_wayback/
+.DS_Store
+*.log
+.env
+.env.local
+public/media/.peaks-cache.json
+src/content/generated.ts
