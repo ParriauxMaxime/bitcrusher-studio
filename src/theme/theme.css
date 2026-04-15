@@ -76,7 +76,9 @@ body {
 	*,
 	*::before,
 	*::after {
+		/* biome-ignore lint/complexity/noImportantStyles: reduced-motion override must win over per-element animations */
 		animation-duration: 0.01ms !important;
+		/* biome-ignore lint/complexity/noImportantStyles: reduced-motion override must win over per-element transitions */
 		transition-duration: 0.01ms !important;
 	}
 }
