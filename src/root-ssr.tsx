@@ -9,12 +9,10 @@ import {
 	personLd,
 	webSiteLd,
 } from "./lib/seo/json-ld";
-import { About } from "./pages/about";
-import { Home } from "./pages/home";
 import { Layout } from "./pages/layout";
+import { LocalePage } from "./pages/locale-page";
 import { NotFound } from "./pages/not-found";
 import { RootSplash } from "./pages/root-splash";
-import { Works } from "./pages/works";
 import { ROUTES, RouteKindEnum } from "./routes";
 
 const ORIGIN =
@@ -48,86 +46,41 @@ export const RootSSR = ({ routePath }: RootSSRProps) => {
 		.with({ kind: RouteKindEnum.root_splash }, () => <RootSplash />)
 		.with(
 			{ kind: RouteKindEnum.home, locale: P.select(P.string) },
-			(localeStr) => {
-				const locale = localeStr as LocaleEnum;
-				const page = content.pages[locale].home;
-				if (!page) return <NotFound locale={locale} />;
-				const featured = Object.values(content.projects[locale])
-					.filter((p) => p.featured)
-					.sort((a, b) => a.order - b.order)
-					.slice(0, 3);
+			(rawLocale: string) => {
+				const locale = rawLocale as LocaleEnum;
+				const home = content.pages[locale].home;
+				const about = content.pages[locale].about;
+				const site = content.site[locale];
+				if (!home || !about) return <NotFound locale={locale} />;
+				const projects = Object.values(content.projects[locale]).sort(
+					(a, b) => a.order - b.order,
+				);
 				const meta = buildMeta({
 					origin: ORIGIN,
 					path: `/${locale}/`,
 					locale,
-					title: page.title,
-					description: page.description,
-					ogImage: page.og_image ?? "/og/default.png",
+					title: home.title,
+					description: home.description,
+					ogImage: home.og_image ?? "/og/default.png",
 					pathWithoutLocale: "/",
-					jsonLd: [organizationLd(ORIGIN), personLd(ORIGIN), webSiteLd(ORIGIN)],
-				});
-				return (
-					<>
-						<Head meta={meta} />
-						<Layout locale={locale} site={content.site[locale]}>
-							<Home locale={locale} page={page} featured={featured} />
-						</Layout>
-					</>
-				);
-			},
-		)
-		.with(
-			{ kind: RouteKindEnum.about, locale: P.select(P.string) },
-			(localeStr) => {
-				const locale = localeStr as LocaleEnum;
-				const page = content.pages[locale].about;
-				if (!page) return <NotFound locale={locale} />;
-				const meta = buildMeta({
-					origin: ORIGIN,
-					path: `/${locale}/about`,
-					locale,
-					title: page.title,
-					description: page.description,
-					ogImage: page.og_image ?? "/og/default.png",
-					pathWithoutLocale: "/about",
-					jsonLd: [personLd(ORIGIN), organizationLd(ORIGIN)],
-				});
-				return (
-					<>
-						<Head meta={meta} />
-						<Layout locale={locale} site={content.site[locale]}>
-							<About page={page} />
-						</Layout>
-					</>
-				);
-			},
-		)
-		.with(
-			{ kind: RouteKindEnum.works, locale: P.select(P.string) },
-			(localeStr) => {
-				const locale = localeStr as LocaleEnum;
-				const projects = Object.values(content.projects[locale]).sort(
-					(a, b) => a.order - b.order,
-				);
-				const site = content.site[locale];
-				const meta = buildMeta({
-					origin: ORIGIN,
-					path: `/${locale}/works`,
-					locale,
-					title: `${site.nav.works} — ${site.seo.site_name}`,
-					description: site.seo.tagline,
-					ogImage: "/og/default.png",
-					pathWithoutLocale: "/works",
 					jsonLd: [
 						organizationLd(ORIGIN),
+						personLd(ORIGIN),
+						webSiteLd(ORIGIN),
 						...projects.map((p) => creativeWorkLd(ORIGIN, locale, p)),
 					],
 				});
 				return (
 					<>
 						<Head meta={meta} />
-						<Layout locale={locale} site={site}>
-							<Works locale={locale} projects={projects} />
+						<Layout site={site}>
+							<LocalePage
+								locale={locale}
+								home={home}
+								about={about}
+								projects={projects}
+								site={site}
+							/>
 						</Layout>
 					</>
 				);
@@ -135,8 +88,8 @@ export const RootSSR = ({ routePath }: RootSSRProps) => {
 		)
 		.with(
 			{ kind: RouteKindEnum.not_found, locale: P.select(P.string) },
-			(localeStr) => {
-				const locale = localeStr as LocaleEnum;
+			(rawLocale: string) => {
+				const locale = rawLocale as LocaleEnum;
 				const site = content.site[locale];
 				const meta = buildMeta({
 					origin: ORIGIN,
@@ -151,7 +104,7 @@ export const RootSSR = ({ routePath }: RootSSRProps) => {
 				return (
 					<>
 						<Head meta={meta} />
-						<Layout locale={locale} site={site}>
+						<Layout site={site}>
 							<NotFound locale={locale} />
 						</Layout>
 					</>
