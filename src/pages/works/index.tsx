@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import type { LocaleEnum, Project } from "@/content/types";
 import { tokens } from "@/theme/tokens";
+import { ProjectModal } from "./project-modal";
 
 const styles = {
 	wrapper: css`
@@ -59,7 +60,7 @@ export interface WorksProps {
 	projects: Project[];
 }
 
-export const Works = ({ locale, projects }: WorksProps) => {
+export const Works = ({ locale: _locale, projects }: WorksProps) => {
 	const { t } = useTranslation();
 	const [activeSlug, setActiveSlug] = useState<string | null>(null);
 
@@ -105,8 +106,21 @@ export const Works = ({ locale, projects }: WorksProps) => {
 					</article>
 				))}
 			</div>
-			<span data-active-slug={activeSlug ?? ""} hidden />
-			<span data-locale={locale} hidden />
+			{(() => {
+				const active = projects.find((p) => p.slug === activeSlug);
+				if (!active) return null;
+				return (
+					<ProjectModal
+						project={active}
+						onClose={() => {
+							setActiveSlug(null);
+							const url = new URL(window.location.href);
+							url.searchParams.delete("project");
+							window.history.replaceState({}, "", url.toString());
+						}}
+					/>
+				);
+			})()}
 		</section>
 	);
 };
