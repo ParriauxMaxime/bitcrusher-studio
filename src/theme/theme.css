@@ -33,6 +33,24 @@
 	--focus-ring: color-mix(in srgb, var(--accent) 80%, transparent);
 }
 
+[data-theme="graphite"] body::after {
+	content: "";
+	position: fixed;
+	inset: 0;
+	pointer-events: none;
+	background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='4' height='4'><path d='M0,4 L4,0' stroke='%23ffffff' stroke-width='.3' opacity='.08'/></svg>");
+	z-index: 0;
+}
+
+body {
+	position: relative;
+}
+
+#root {
+	position: relative;
+	z-index: 1;
+}
+
 * {
 	box-sizing: border-box;
 }
