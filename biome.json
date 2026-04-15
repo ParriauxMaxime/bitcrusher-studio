@@ -28,7 +28,8 @@
 			"!docs",
 			"!_wayback",
 			"!src/content/generated.ts",
-			"!public/media/.peaks-cache.json"
+			"!public/media/.peaks-cache.json",
+			"!public/og/.cache.json"
 		]
 	},
 	"formatter": {

@@ -11,6 +11,11 @@ const steps: Array<{ name: string; cmd: string; args: string[] }> = [
 		cmd: "npx",
 		args: ["tsx", "scripts/generate-waveforms.ts"],
 	},
+	{
+		name: "og images",
+		cmd: "npx",
+		args: ["tsx", "scripts/generate-og-images.ts"],
+	},
 ];
 
 for (const step of steps) {

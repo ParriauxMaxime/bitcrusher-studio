@@ -9,4 +9,5 @@ _wayback/
 .env
 .env.local
 public/media/.peaks-cache.json
+public/og/.cache.json
 src/content/generated.ts
