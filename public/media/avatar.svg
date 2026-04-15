@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200">
+	<defs>
+		<radialGradient id="g" cx="30%" cy="30%" r="80%">
+			<stop offset="0%" stop-color="#5a4a3a" />
+			<stop offset="100%" stop-color="#1a1510" />
+		</radialGradient>
+	</defs>
+	<circle cx="100" cy="100" r="96" fill="url(#g)" stroke="#f5c44a" stroke-width="2" />
+	<text
+		x="100"
+		y="138"
+		text-anchor="middle"
+		font-family="Georgia, serif"
+		font-style="italic"
+		font-size="128"
+		font-weight="400"
+		fill="#f5c44a"
+	>Q</text>
+</svg>

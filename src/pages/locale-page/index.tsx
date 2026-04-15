@@ -69,6 +69,39 @@ const styles = {
 		grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
 		gap: 16px;
 	`,
+	heroLayout: css`
+		display: flex;
+		align-items: center;
+		gap: 48px;
+		flex-wrap: wrap;
+	`,
+	avatar: css`
+		flex: 0 0 auto;
+		width: clamp(140px, 18vw, 220px);
+		height: auto;
+		border-radius: 50%;
+		border: 1px solid ${tokens.surface.border};
+	`,
+	heroContent: css`
+		flex: 1 1 320px;
+		display: flex;
+		flex-direction: column;
+		gap: 20px;
+	`,
+	taglineLarge: css`
+		color: ${tokens.text.body};
+		font-size: clamp(18px, 1.9vw, 24px);
+		line-height: 1.45;
+		max-width: 560px;
+		margin: 0;
+	`,
+	taglineSmall: css`
+		color: ${tokens.text.muted};
+		font-size: 14px;
+		line-height: 1.6;
+		max-width: 560px;
+		margin: 0;
+	`,
 };
 
 export interface LocalePageProps {
@@ -113,10 +146,22 @@ export const LocalePage = ({
 	return (
 		<>
 			<section css={styles.hero} id="hero">
-				<h1 css={styles.brand}>
-					Bitcrusher <em>Studio</em>
-				</h1>
-				<p css={styles.tagline}>{home.body || site.seo.tagline}</p>
+				<div css={styles.heroLayout}>
+					<img
+						css={styles.avatar}
+						src="/media/avatar.svg"
+						alt="Quentin Ferreira-Castiço"
+						width={220}
+						height={220}
+					/>
+					<div css={styles.heroContent}>
+						<h1 css={styles.brand}>
+							Bitcrusher <em>Studio</em>
+						</h1>
+						<p css={styles.taglineLarge}>{site.seo.tagline}</p>
+						{home.body && <p css={styles.taglineSmall}>{home.body}</p>}
+					</div>
+				</div>
 			</section>
 
 			<section css={styles.section} id="about" aria-labelledby="about-heading">
