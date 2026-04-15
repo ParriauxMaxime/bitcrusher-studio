@@ -1,9 +1,7 @@
 import { css } from "@emotion/react";
-import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { ProjectCard } from "@/components/project-card/project-card";
+import { AudioPlayer } from "@/components/audio-player";
 import type { LocaleEnum, Page, Project, SiteCopy } from "@/content/types";
-import { ProjectModal } from "@/pages/works/project-modal";
 import { tokens } from "@/theme/tokens";
 
 const styles = {
@@ -12,6 +10,25 @@ const styles = {
 		max-width: 1080px;
 		margin: 0 auto;
 	`,
+	heroLayout: css`
+		display: flex;
+		align-items: center;
+		gap: 48px;
+		flex-wrap: wrap;
+	`,
+	avatar: css`
+		flex: 0 0 auto;
+		width: clamp(140px, 18vw, 220px);
+		height: auto;
+		border-radius: 50%;
+		border: 1px solid ${tokens.surface.border};
+	`,
+	heroContent: css`
+		flex: 1 1 320px;
+		display: flex;
+		flex-direction: column;
+		gap: 20px;
+	`,
 	brand: css`
 		font-family: "Instrument Serif", Georgia, serif;
 		font-style: italic;
@@ -19,27 +36,27 @@ const styles = {
 		color: ${tokens.text.heading};
 		line-height: 0.95;
 		letter-spacing: -0.03em;
-		margin: 0 0 28px;
+		margin: 0 0 8px;
 	`,
-	tagline: css`
+	taglineLarge: css`
 		color: ${tokens.text.body};
-		font-size: clamp(16px, 1.6vw, 20px);
-		line-height: 1.55;
-		max-width: 640px;
+		font-size: clamp(18px, 1.9vw, 24px);
+		line-height: 1.45;
+		max-width: 560px;
+		margin: 0;
+	`,
+	taglineSmall: css`
+		color: ${tokens.text.muted};
+		font-size: 14px;
+		line-height: 1.6;
+		max-width: 560px;
+		margin: 0;
 	`,
 	section: css`
 		padding: 80px 28px;
 		max-width: 1080px;
 		margin: 0 auto;
 		border-top: 1px solid ${tokens.surface.border};
-	`,
-	sectionLabel: css`
-		font-family: "JetBrains Mono", ui-monospace, monospace;
-		font-size: 10px;
-		letter-spacing: 0.3em;
-		text-transform: uppercase;
-		color: ${tokens.text.muted};
-		margin: 0 0 24px;
 	`,
 	aboutTitle: css`
 		font-family: "Instrument Serif", Georgia, serif;
@@ -62,46 +79,94 @@ const styles = {
 		font-size: clamp(36px, 5vw, 56px);
 		color: ${tokens.text.heading};
 		letter-spacing: -0.02em;
-		margin: 0 0 40px;
+		margin: 0 0 16px;
 	`,
-	grid: css`
-		display: grid;
-		grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-		gap: 16px;
-	`,
-	heroLayout: css`
-		display: flex;
-		align-items: center;
-		gap: 48px;
-		flex-wrap: wrap;
-	`,
-	avatar: css`
-		flex: 0 0 auto;
-		width: clamp(140px, 18vw, 220px);
-		height: auto;
-		border-radius: 50%;
-		border: 1px solid ${tokens.surface.border};
-	`,
-	heroContent: css`
-		flex: 1 1 320px;
+	projectList: css`
 		display: flex;
 		flex-direction: column;
-		gap: 20px;
+		gap: 0;
 	`,
-	taglineLarge: css`
-		color: ${tokens.text.body};
-		font-size: clamp(18px, 1.9vw, 24px);
-		line-height: 1.45;
-		max-width: 560px;
-		margin: 0;
+	projectArticle: css`
+		padding: 56px 0;
+		border-top: 1px dashed ${tokens.surface.border};
+		display: flex;
+		flex-direction: column;
+		gap: 14px;
+		&:first-of-type {
+			border-top: none;
+			padding-top: 24px;
+		}
 	`,
-	taglineSmall: css`
+	projectChannel: css`
+		font-family: "JetBrains Mono", ui-monospace, monospace;
+		font-size: 10px;
+		letter-spacing: 0.25em;
+		text-transform: uppercase;
 		color: ${tokens.text.muted};
-		font-size: 14px;
-		line-height: 1.6;
-		max-width: 560px;
-		margin: 0;
 	`,
+	projectTitle: css`
+		font-family: "Instrument Serif", Georgia, serif;
+		font-style: italic;
+		font-size: clamp(32px, 5vw, 56px);
+		color: ${tokens.text.heading};
+		letter-spacing: -0.02em;
+		line-height: 1.05;
+		margin: 0;
+		em {
+			color: ${tokens.accent};
+			font-style: italic;
+			font-weight: 400;
+		}
+	`,
+	projectMeta: css`
+		font-family: "JetBrains Mono", ui-monospace, monospace;
+		font-size: 11px;
+		letter-spacing: 0.1em;
+		color: ${tokens.text.body};
+	`,
+	projectBody: css`
+		font-size: 16px;
+		line-height: 1.7;
+		color: ${tokens.text.body};
+		max-width: 720px;
+		white-space: pre-wrap;
+		margin: 4px 0 0;
+	`,
+	linkList: css`
+		display: flex;
+		gap: 16px;
+		flex-wrap: wrap;
+		margin-top: 8px;
+		a {
+			color: ${tokens.accent};
+			text-decoration: none;
+			font-family: "JetBrains Mono", ui-monospace, monospace;
+			font-size: 11px;
+			letter-spacing: 0.18em;
+			text-transform: uppercase;
+			border-bottom: 1px solid ${tokens.accent};
+			padding-bottom: 2px;
+		}
+	`,
+};
+
+const splitTitle = (title: string): { head: string; tail: string } => {
+	const parts = title.trim().split(" ");
+	if (parts.length < 2) return { head: "", tail: title };
+	const tail = parts.pop() ?? "";
+	return { head: parts.join(" "), tail };
+};
+
+const channelLabel = (project: Project): string => {
+	const role = project.roles[0] ?? "sound_design";
+	return `CH_${String(project.order).padStart(2, "0")} · ${role.replace(/_/g, " ").toUpperCase()}`;
+};
+
+const metaLabel = (project: Project): string => {
+	const right = project.collaborators.length
+		? project.collaborators.join(" × ")
+		: (project.roles[0] ?? "").replace(/_/g, " ");
+	return `${project.year} — ${right.toUpperCase()}`;
 };
 
 export interface LocalePageProps {
@@ -120,28 +185,6 @@ export const LocalePage = ({
 	site,
 }: LocalePageProps) => {
 	const { t } = useTranslation();
-	const [activeSlug, setActiveSlug] = useState<string | null>(null);
-
-	useEffect(() => {
-		const params = new URLSearchParams(window.location.search);
-		setActiveSlug(params.get("project"));
-	}, []);
-
-	const open = (slug: string) => {
-		setActiveSlug(slug);
-		const url = new URL(window.location.href);
-		url.searchParams.set("project", slug);
-		window.history.replaceState({}, "", url.toString());
-	};
-
-	const close = () => {
-		setActiveSlug(null);
-		const url = new URL(window.location.href);
-		url.searchParams.delete("project");
-		window.history.replaceState({}, "", url.toString());
-	};
-
-	const activeProject = projects.find((p) => p.slug === activeSlug) ?? null;
 
 	return (
 		<>
@@ -172,31 +215,49 @@ export const LocalePage = ({
 			</section>
 
 			<section css={styles.section} id="works" aria-labelledby="works-heading">
-				<div css={styles.sectionLabel}>
-					— {t("works.selection")} · {String(projects.length).padStart(2, "0")}
-				</div>
 				<h2 id="works-heading" css={styles.worksTitle}>
 					{site.nav.works}
 				</h2>
 				{projects.length === 0 ? (
 					<p>{t("works.empty")}</p>
 				) : (
-					<div css={styles.grid}>
-						{projects.map((p) => (
-							<ProjectCard
-								key={p.slug}
-								project={p}
-								variant="button"
-								onSelect={open}
-							/>
-						))}
+					<div css={styles.projectList}>
+						{projects.map((p) => {
+							const { head, tail } = splitTitle(p.title);
+							return (
+								<article
+									key={p.slug}
+									id={`project-${p.slug}`}
+									css={styles.projectArticle}
+								>
+									<div css={styles.projectChannel}>{channelLabel(p)}</div>
+									<h3 css={styles.projectTitle}>
+										{head ? `${head} ` : ""}
+										<em>{tail}</em>
+									</h3>
+									<div css={styles.projectMeta}>{metaLabel(p)}</div>
+									<div css={styles.projectBody}>{p.body}</div>
+									{p.audio.length > 0 && <AudioPlayer sources={p.audio} />}
+									{p.links.length > 0 && (
+										<div css={styles.linkList}>
+											{p.links.map((l) => (
+												<a
+													key={l.url}
+													href={l.url}
+													target="_blank"
+													rel="noreferrer noopener"
+												>
+													{l.label} ↗
+												</a>
+											))}
+										</div>
+									)}
+								</article>
+							);
+						})}
 					</div>
 				)}
 			</section>
-
-			{activeProject && (
-				<ProjectModal project={activeProject} onClose={close} />
-			)}
 		</>
 	);
 };
