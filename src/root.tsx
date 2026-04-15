@@ -1,49 +1,95 @@
-import { css } from "@emotion/react";
-import { Footer } from "./components/shell/footer";
-import { Header } from "./components/shell/header";
-import { SkipLink } from "./components/shell/skip-link";
-import { ThemeSwitcherDev } from "./components/theme-switcher-dev/theme-switcher-dev";
-import { tokens } from "./theme/tokens";
+import { useEffect, useState } from "react";
+import { match, P } from "ts-pattern";
+import { content } from "@/content/generated";
+import { ALL_LOCALES, DEFAULT_LOCALE, type LocaleEnum } from "@/content/types";
+import { initI18n } from "@/i18n";
+import { About } from "@/pages/about";
+import { Home } from "@/pages/home";
+import { Layout } from "@/pages/layout";
+import { NotFound } from "@/pages/not-found";
+import { RootSplash } from "@/pages/root-splash";
+import { Works } from "@/pages/works";
+import { ROUTES, RouteKindEnum } from "@/routes";
 
-const styles = {
-	main: css`
-		padding: 64px 28px;
-		max-width: 1080px;
-		margin: 0 auto;
-		color: ${tokens.text.heading};
-		min-height: 60vh;
-	`,
+const resolveRoute = () => {
+	const path = window.location.pathname.replace(/\/$/, "") || "/";
+	const matched = ROUTES.find((r) => r.path === path);
+	if (matched) return matched;
+	for (const locale of ALL_LOCALES) {
+		if (path.startsWith(`/${locale}`)) {
+			return { path: `/${locale}/404`, kind: RouteKindEnum.not_found, locale };
+		}
+	}
+	return { path: "/", kind: RouteKindEnum.root_splash };
 };
 
-const isDev = process.env.NODE_ENV !== "production";
-
 export const Root = () => {
-	return (
-		<>
-			<SkipLink />
-			<Header
-				navLabels={{ home: "Home", about: "About", works: "Works" }}
-				langPrefix="/fr"
-			/>
-			<main id="main" css={styles.main}>
-				Bitcrusher Studio — bootstrap.
-			</main>
-			<Footer
-				email="contact@bitcrusher-studio.com"
-				copyright="© 2026 Bitcrusher Studio · Tous droits réservés"
-				socials={[
-					{ label: "SoundCloud", url: "https://soundcloud.com/user-836588138" },
-					{
-						label: "YouTube",
-						url: "https://youtube.com/playlist?list=PLL6AYm1TFMrcIqQv9stuyjAoS_-UK4zD4",
-					},
-					{
-						label: "LinkedIn",
-						url: "https://www.linkedin.com/in/quentin-ferreira-castiço",
-					},
-				]}
-			/>
-			{isDev && <ThemeSwitcherDev />}
-		</>
-	);
+	const [ready, setReady] = useState(false);
+	const [route] = useState(() => resolveRoute());
+
+	useEffect(() => {
+		const locale = route.locale ?? DEFAULT_LOCALE;
+		initI18n(locale).then(() => {
+			document.documentElement.lang = locale;
+			setReady(true);
+		});
+	}, [route.locale]);
+
+	if (!ready) return null;
+
+	return match(route)
+		.with({ kind: RouteKindEnum.root_splash }, () => <RootSplash />)
+		.with(
+			{ kind: RouteKindEnum.home, locale: P.select() },
+			(locale: LocaleEnum) => {
+				const page = content.pages[locale].home;
+				if (!page) return <NotFound locale={locale} />;
+				const featured = Object.values(content.projects[locale])
+					.filter((p) => p.featured)
+					.sort((a, b) => a.order - b.order)
+					.slice(0, 3);
+				return (
+					<Layout locale={locale} site={content.site[locale]}>
+						<Home locale={locale} page={page} featured={featured} />
+					</Layout>
+				);
+			},
+		)
+		.with(
+			{ kind: RouteKindEnum.about, locale: P.select() },
+			(locale: LocaleEnum) => {
+				const page = content.pages[locale].about;
+				if (!page) return <NotFound locale={locale} />;
+				return (
+					<Layout locale={locale} site={content.site[locale]}>
+						<About page={page} />
+					</Layout>
+				);
+			},
+		)
+		.with(
+			{ kind: RouteKindEnum.works, locale: P.select() },
+			(locale: LocaleEnum) => {
+				const projects = Object.values(content.projects[locale]).sort(
+					(a, b) => a.order - b.order,
+				);
+				return (
+					<Layout locale={locale} site={content.site[locale]}>
+						<Works locale={locale} projects={projects} />
+					</Layout>
+				);
+			},
+		)
+		.with(
+			{ kind: RouteKindEnum.not_found, locale: P.select() },
+			(locale: LocaleEnum) => {
+				const site = content.site[locale];
+				return (
+					<Layout locale={locale} site={site}>
+						<NotFound locale={locale} />
+					</Layout>
+				);
+			},
+		)
+		.exhaustive();
 };
