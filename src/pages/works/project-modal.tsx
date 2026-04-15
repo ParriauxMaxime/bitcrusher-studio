@@ -24,8 +24,25 @@ const styles = {
 		width: 100%;
 		max-height: 90vh;
 		overflow: auto;
-		padding: 32px;
+		padding: 40px;
 		color: ${tokens.text.body};
+		position: relative;
+		&::before {
+			content: "";
+			position: absolute;
+			inset: 8px;
+			border: 1px solid ${tokens.surface.border};
+			pointer-events: none;
+			border-radius: 4px;
+		}
+	`,
+	channel: css`
+		font-family: "JetBrains Mono", ui-monospace, monospace;
+		font-size: 9px;
+		letter-spacing: 0.25em;
+		color: ${tokens.text.muted};
+		text-transform: uppercase;
+		margin-bottom: 6px;
 	`,
 	close: css`
 		background: none;
@@ -57,6 +74,11 @@ const styles = {
 		font-size: 34px;
 		color: ${tokens.text.heading};
 		margin: 0 0 14px;
+		em {
+			color: ${tokens.accent};
+			font-style: italic;
+			font-weight: 400;
+		}
 	`,
 	body: css`
 		font-size: 15px;
@@ -120,12 +142,24 @@ export const ProjectModal = ({ project, onClose }: ProjectModalProps) => {
 				<button type="button" css={styles.close} onClick={onClose}>
 					{t("common.close")} ✕
 				</button>
+				<div css={styles.channel}>
+					CH_{String(project.order).padStart(2, "0")} ·{" "}
+					{(project.roles[0] ?? "").replace(/_/g, " ").toUpperCase()}
+				</div>
 				<div css={styles.meta}>
 					{project.year} · {project.roles.join(" · ")}
 				</div>
-				<h2 id={titleId} css={styles.h2}>
-					{project.title}
-				</h2>
+				{(() => {
+					const parts = project.title.trim().split(" ");
+					const tail = parts.pop() ?? "";
+					const head = parts.join(" ");
+					return (
+						<h2 id={titleId} css={styles.h2}>
+							{head ? `${head} ` : ""}
+							<em>{tail}</em>
+						</h2>
+					);
+				})()}
 				<div css={styles.body}>{project.body}</div>
 				<AudioPlayer sources={project.audio} />
 				{project.links.length > 0 && (
