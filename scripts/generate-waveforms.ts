@@ -2,7 +2,6 @@ import { createHash } from "node:crypto";
 import { existsSync } from "node:fs";
 import { readdir, readFile, stat, writeFile } from "node:fs/promises";
 import { extname, join, relative } from "node:path";
-// @ts-expect-error — published types lag behind the runtime API
 import { AudioContext } from "node-web-audio-api";
 
 const MEDIA_ROOT = join(process.cwd(), "public/media");
