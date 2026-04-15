@@ -76,6 +76,22 @@ export const RootSplash = () => (
 					</a>
 				))}
 			</nav>
+			<script
+				// biome-ignore lint/security/noDangerouslySetInnerHtml: inline redirect
+				dangerouslySetInnerHTML={{
+					__html: `
+(function(){
+  try {
+    var lang = (navigator.language || 'fr').toLowerCase();
+    var pick = lang.startsWith('en') ? 'en' : lang.startsWith('es') ? 'es' : 'fr';
+    if (location.pathname === '/' || location.pathname === '') {
+      location.replace('/' + pick + '/');
+    }
+  } catch(e) {}
+})();
+`,
+				}}
+			/>
 		</div>
 	</div>
 );
