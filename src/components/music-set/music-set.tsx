@@ -178,7 +178,7 @@ const VuColumn = ({ level }: { level: number }) => {
 			css={css`
 				display: flex;
 				flex-direction: column-reverse;
-				gap: 3px;
+				gap: 4px;
 			`}
 		>
 			{Array.from({ length: VU_DOTS }, (_, i) => {
@@ -188,12 +188,20 @@ const VuColumn = ({ level }: { level: number }) => {
 					<div
 						key={i}
 						css={css`
-							width: 6px;
-							height: 6px;
+							width: 10px;
+							height: 10px;
 							border-radius: 50%;
-							background: ${lit ? color : tokens.led.off};
-							box-shadow: ${lit ? `0 0 6px ${color}` : "none"};
-							transition: background 0.05s, box-shadow 0.05s;
+							background: ${
+								lit
+									? `radial-gradient(circle at 35% 35%, rgba(255,255,255,0.6), ${color} 50%, rgba(0,0,0,0.3) 100%)`
+									: `radial-gradient(circle at 35% 35%, rgba(255,255,255,0.08), ${tokens.led.off} 60%, rgba(0,0,0,0.4) 100%)`
+							};
+							box-shadow: ${
+								lit
+									? `0 0 8px 2px ${color}, inset 0 -2px 3px rgba(0,0,0,0.3), inset 0 1px 2px rgba(255,255,255,0.4)`
+									: `inset 0 -1px 2px rgba(0,0,0,0.4), inset 0 1px 1px rgba(255,255,255,0.05)`
+							};
+							transition: background 0.06s, box-shadow 0.06s;
 						`}
 					/>
 				);
