@@ -10,7 +10,13 @@ cover: /media/projects/dawn-of-light/cover.jpg
 audio:
   - kind: soundcloud
     url: https://soundcloud.com/user-836588138/dawn-of-light-main-menu-theme-one-shot
-    title: Dawn of Light — Main Menu Theme (One Shot)
+    title: Main Menu Theme (One Shot)
+  - kind: soundcloud
+    url: https://soundcloud.com/user-836588138/dawn-of-light-credits-music
+    title: Credits Music
+  - kind: soundcloud
+    url: https://soundcloud.com/user-836588138/dawn-of-light-menu-theme-extended-prototype
+    title: Menu Theme (Extended Prototype)
 links:
   - label: Steam
     url: https://store.steampowered.com/app/1597950/Dawn_of_Light/

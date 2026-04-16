@@ -7,7 +7,13 @@ year: 2024
 roles: [music_composition]
 tags: [mobile, puzzle, dreamlike]
 cover: /media/projects/a-sound-in-the-forest/cover.jpg
-audio: []
+audio:
+  - kind: soundcloud
+    url: https://soundcloud.com/user-836588138/a-sound-in-the-forest-theme-n1
+    title: Theme N°1
+  - kind: soundcloud
+    url: https://soundcloud.com/user-836588138/a-sound-in-the-forest-in-game-exemple
+    title: In Game (Example)
 links:
   - label: Concept art — Viktor Tounissoux
     url: https://www.artstation.com/viktortounissoux
