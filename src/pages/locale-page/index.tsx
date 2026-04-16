@@ -36,7 +36,7 @@ const styles = {
 	`,
 	avatar: css`
 		flex: 0 0 auto;
-		width: clamp(140px, 18vw, 220px);
+		width: clamp(180px, 22vw, 300px);
 		height: auto;
 		border-radius: 50%;
 		border: 1px solid ${tokens.surface.border};
