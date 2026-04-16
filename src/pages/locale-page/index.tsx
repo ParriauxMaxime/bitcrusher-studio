@@ -29,6 +29,10 @@ const styles = {
 		gap: 48px;
 		flex-wrap: wrap;
 		flex-direction: row-reverse;
+		@media (max-width: 640px) {
+			flex-direction: column;
+			text-align: center;
+		}
 	`,
 	avatar: css`
 		flex: 0 0 auto;
