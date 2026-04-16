@@ -17,19 +17,53 @@ const xmlEscape = (s: string): string =>
 		.replace(/"/g, "&quot;")
 		.replace(/'/g, "&apos;");
 
+const vuLed = (x: number, y: number, color: string, lit: boolean): string =>
+	`<circle cx="${x}" cy="${y}" r="8" fill="${lit ? color : "#2a3a4a"}"${lit ? ` opacity="0.9"` : ""}/>`;
+
+const vuColumn = (x: number, level: number): string => {
+	const colors = [
+		"#5ba32b",
+		"#5ba32b",
+		"#5ba32b",
+		"#5ba32b",
+		"#66c0f4",
+		"#66c0f4",
+		"#66c0f4",
+		"#ff5a4a",
+		"#ff5a4a",
+	];
+	return colors
+		.map((c, i) => vuLed(x, 540 - i * 22, c, i < level))
+		.join("\n    ");
+};
+
 const template = (title: string, subtitle: string): string => `
 <svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
-  <rect width="1200" height="630" fill="url(#g)"/>
   <defs>
     <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0" stop-color="#2e2e33"/>
-      <stop offset="1" stop-color="#18181c"/>
+      <stop offset="0" stop-color="#1b2838"/>
+      <stop offset="1" stop-color="#171a21"/>
     </linearGradient>
   </defs>
-  <text x="80" y="160" font-family="JetBrains Mono, monospace" font-size="24" fill="#f5c44a" letter-spacing="6">BITCRUSHER STUDIO</text>
-  <text x="80" y="340" font-family="Georgia, serif" font-style="italic" font-size="96" fill="#f0f0f2">${xmlEscape(title.slice(0, 40))}</text>
-  <text x="80" y="420" font-family="Inter, sans-serif" font-size="28" fill="#b8b8c0">${xmlEscape(subtitle.slice(0, 80))}</text>
-  <rect x="80" y="540" width="1040" height="2" fill="#f5c44a" opacity="0.4"/>
+  <rect width="1200" height="630" fill="url(#g)"/>
+
+  <!-- Mono label -->
+  <text x="80" y="140" font-family="monospace" font-size="20" fill="#66c0f4" letter-spacing="6">BITCRUSHER STUDIO</text>
+
+  <!-- Title -->
+  <text x="80" y="300" font-family="Georgia, serif" font-style="italic" font-size="86" fill="#e5e5e5">${xmlEscape(title.slice(0, 30))}</text>
+  <text x="80" y="390" font-family="sans-serif" font-size="28" fill="#acb2b8">${xmlEscape(subtitle.slice(0, 70))}</text>
+
+  <!-- Accent line -->
+  <rect x="80" y="440" width="500" height="2" fill="#66c0f4" opacity="0.4"/>
+
+  <!-- VU meter decoration (right side) -->
+  <g>
+    ${vuColumn(1060, 6)}
+    ${vuColumn(1090, 4)}
+    ${vuColumn(1120, 7)}
+    ${vuColumn(1150, 5)}
+  </g>
 </svg>
 `;
 
@@ -51,22 +85,6 @@ const run = async () => {
 		title: "Bitcrusher Studio",
 		subtitle: "Sound Design · Music · Composition",
 	});
-	for (const locale of ALL_LOCALES) {
-		const homePage = content.pages[locale].home;
-		if (homePage)
-			queue.push({
-				key: `home-${locale}`,
-				title: homePage.title,
-				subtitle: homePage.description,
-			});
-		for (const project of Object.values(content.projects[locale])) {
-			queue.push({
-				key: `${locale}-${project.slug}`,
-				title: project.title,
-				subtitle: `${project.year} · ${project.roles.join(" · ")}`,
-			});
-		}
-	}
 
 	for (const { key, title, subtitle } of queue) {
 		const svg = template(title, subtitle);
