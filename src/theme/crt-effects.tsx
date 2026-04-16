@@ -1,4 +1,7 @@
 import { useCallback, useEffect, useState } from "react";
+import { content } from "@/content/generated";
+
+const siteTheme = content.site.fr.theme;
 
 export const CRT_LAYERS = [
 	"scanlines",
@@ -22,11 +25,11 @@ export type CrtState = Record<CrtLayer, number>;
 const STORAGE_PREFIX = "crt-";
 
 const defaultState = (): CrtState => ({
-	scanlines: 42,
-	glow: 37,
-	aberration: 53,
-	vignette: 65,
-	flicker: 0,
+	scanlines: siteTheme?.crt?.scanlines ?? 42,
+	glow: siteTheme?.crt?.glow ?? 37,
+	aberration: siteTheme?.crt?.aberration ?? 53,
+	vignette: siteTheme?.crt?.vignette ?? 65,
+	flicker: siteTheme?.crt?.flicker ?? 0,
 });
 
 const readState = (): CrtState => {

@@ -1,5 +1,9 @@
 import { useCallback, useSyncExternalStore } from "react";
+import { content } from "@/content/generated";
 import { ALL_THEMES, ThemeEnum } from "./tokens";
+
+const DEFAULT_THEME =
+	(content.site.fr.theme?.default as ThemeEnum) ?? ThemeEnum.vapor;
 
 const STORAGE_KEY = "theme";
 
@@ -13,7 +17,7 @@ const readTheme = (): ThemeEnum => {
 	) {
 		return fromDom;
 	}
-	return ThemeEnum.vapor;
+	return DEFAULT_THEME;
 };
 
 const subscribers = new Set<() => void>();
