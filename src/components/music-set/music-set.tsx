@@ -316,8 +316,8 @@ export const MusicSet = ({ sources }: MusicSetProps) => {
 		analyserRef.current.getByteFrequencyData(data);
 		let sumL = 0;
 		let sumR = 0;
-		for (let i = 0; i < 16; i++) sumL += (data[i] ?? 0) ** 2;
-		for (let i = 16; i < 32; i++) sumR += (data[i] ?? 0) ** 2;
+		for (let i = 0; i < 32; i += 2) sumL += (data[i] ?? 0) ** 2;
+		for (let i = 1; i < 32; i += 2) sumR += (data[i] ?? 0) ** 2;
 		const rawL = Math.sqrt(sumL / 16) / 255;
 		const rawR = Math.sqrt(sumR / 16) / 255;
 		const left = Math.min(1, rawL ** 0.75 * 0.95);
