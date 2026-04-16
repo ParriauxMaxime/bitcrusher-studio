@@ -44,7 +44,7 @@ const styles = {
 	`,
 	trackIcon: css`
 		color: ${tokens.accent};
-		font-size: 16px;
+		font-size: 10px;
 		flex-shrink: 0;
 		width: 18px;
 		text-align: center;
@@ -88,7 +88,7 @@ const styles = {
 		width: 28px;
 		height: 28px;
 		cursor: pointer;
-		font-size: 12px;
+		font-size: 10px;
 		display: flex;
 		align-items: center;
 		justify-content: center;
@@ -410,7 +410,7 @@ export const MusicSet = ({ sources }: MusicSetProps) => {
 								aria-current={active}
 							>
 								<span css={styles.trackIcon} aria-hidden="true">
-									{active && state.playing ? "⏸" : "▶"}
+									{active && state.playing ? "❚❚" : "▶"}
 								</span>
 								<span css={styles.trackTitle}>{s.title}</span>
 								{s.duration !== undefined && (
@@ -444,7 +444,7 @@ export const MusicSet = ({ sources }: MusicSetProps) => {
 							onClick={toggle}
 							aria-label={state.playing ? "Pause" : "Play"}
 						>
-							{state.playing ? "⏸" : "▶"}
+							{state.playing ? "❚❚" : "▶"}
 						</button>
 						<span css={styles.time}>
 							{fmt(state.time)} / {fmt(state.duration)}
