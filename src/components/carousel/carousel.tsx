@@ -88,10 +88,14 @@ const styles = {
 		right: 8px;
 	`,
 	dots: css`
+		position: absolute;
+		bottom: 8px;
+		left: 0;
+		right: 0;
 		display: flex;
 		justify-content: center;
 		gap: 6px;
-		padding: 10px 0;
+		z-index: 2;
 	`,
 };
 

@@ -67,9 +67,7 @@ const styles = {
 		background: rgba(0, 0, 0, 0.15);
 		padding: 12px;
 		display: flex;
-		flex-direction: column;
-		justify-content: space-between;
-		gap: 8px;
+		gap: 10px;
 	`,
 	playerTitle: css`
 		font-size: 13px;
@@ -139,16 +137,23 @@ const styles = {
 			border: none;
 		}
 	`,
-	playerRight: css`
-		display: flex;
-		gap: 14px;
-		align-items: center;
-	`,
 	playerMain: css`
 		flex: 1;
 		display: flex;
 		flex-direction: column;
+		justify-content: space-between;
 		gap: 6px;
+		min-height: 0;
+	`,
+	playerTop: css`
+		display: flex;
+		flex-direction: column;
+		gap: 6px;
+	`,
+	vuWrapper: css`
+		display: flex;
+		align-items: center;
+		align-self: stretch;
 	`,
 };
 
@@ -418,9 +423,9 @@ export const MusicSet = ({ sources }: MusicSetProps) => {
 
 			{/* Player */}
 			<div css={styles.player}>
-				<div css={styles.playerTitle}>{activeSource.title}</div>
-				<div css={styles.playerRight}>
-					<div css={styles.playerMain}>
+				<div css={styles.playerMain}>
+					<div css={styles.playerTop}>
+						<div css={styles.playerTitle}>{activeSource.title}</div>
 						{peaks && (
 							<Waveform
 								peaks={peaks.peaks}
@@ -430,33 +435,35 @@ export const MusicSet = ({ sources }: MusicSetProps) => {
 								}
 							/>
 						)}
-						<div css={styles.controls}>
-							<button
-								type="button"
-								css={styles.playBtn}
-								onClick={toggle}
-								aria-label={state.playing ? "Pause" : "Play"}
-							>
-								{state.playing ? "❚❚" : "▶"}
-							</button>
-							<span css={styles.time}>
-								{fmt(state.time)} / {fmt(state.duration)}
-							</span>
-							<div css={styles.volume}>
-								<span css={styles.volumeLabel}>VOL</span>
-								<input
-									type="range"
-									css={styles.volumeSlider}
-									min={0}
-									max={1}
-									step={0.01}
-									value={volume}
-									onChange={handleVolumeChange}
-									aria-label="Volume"
-								/>
-							</div>
+					</div>
+					<div css={styles.controls}>
+						<button
+							type="button"
+							css={styles.playBtn}
+							onClick={toggle}
+							aria-label={state.playing ? "Pause" : "Play"}
+						>
+							{state.playing ? "❚❚" : "▶"}
+						</button>
+						<span css={styles.time}>
+							{fmt(state.time)} / {fmt(state.duration)}
+						</span>
+						<div css={styles.volume}>
+							<span css={styles.volumeLabel}>VOL</span>
+							<input
+								type="range"
+								css={styles.volumeSlider}
+								min={0}
+								max={1}
+								step={0.01}
+								value={volume}
+								onChange={handleVolumeChange}
+								aria-label="Volume"
+							/>
 						</div>
 					</div>
+				</div>
+				<div css={styles.vuWrapper}>
 					<VuMeter levels={vuLevels} />
 				</div>
 			</div>
