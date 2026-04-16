@@ -22,7 +22,7 @@ const xmlEscape = (s: string): string =>
 
 const vuLed = (x: number, y: number, color: string, lit: boolean): string =>
 	lit
-		? `<circle cx="${x}" cy="${y}" r="16" fill="${color}" opacity="0.1"/><circle cx="${x}" cy="${y}" r="11" fill="${color}" opacity="0.15"/><circle cx="${x}" cy="${y}" r="8" fill="${color}" opacity="0.9"/>`
+		? `<circle cx="${x}" cy="${y}" r="8" fill="${color}" opacity="0.9" filter="url(#glow)"/>`
 		: `<circle cx="${x}" cy="${y}" r="8" fill="#2a3a4a"/>`;
 
 const vuColumn = (x: number, level: number): string => {
@@ -76,13 +76,13 @@ const template = (title: string, subtitle: string): string => `
   </radialGradient>
   <rect width="1200" height="630" fill="url(#vig)"/>
 
-  <!-- Text glow filter (soft diffuse) -->
-  <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
-    <feGaussianBlur in="SourceGraphic" stdDeviation="12" result="b1"/>
-    <feGaussianBlur in="SourceGraphic" stdDeviation="25" result="b2"/>
+  <!-- Organic glow filter (blurred + noise-distorted) -->
+  <filter id="glow" x="-15%" y="-15%" width="130%" height="130%">
+    <feGaussianBlur in="SourceGraphic" stdDeviation="8" result="blur"/>
+    <feTurbulence type="fractalNoise" baseFrequency="0.04" numOctaves="2" result="noise"/>
+    <feDisplacementMap in="blur" in2="noise" scale="12" xChannelSelector="R" yChannelSelector="G" result="warped"/>
     <feMerge>
-      <feMergeNode in="b2"/>
-      <feMergeNode in="b1"/>
+      <feMergeNode in="warped"/>
       <feMergeNode in="SourceGraphic"/>
     </feMerge>
   </filter>
