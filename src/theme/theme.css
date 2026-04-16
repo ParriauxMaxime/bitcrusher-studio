@@ -1,3 +1,7 @@
+:root {
+	--crt: 0;
+}
+
 :root,
 [data-theme="graphite"] {
 	--surface-base: linear-gradient(145deg, #2e2e33 0%, #18181c 100%);
@@ -33,6 +37,22 @@
 	--focus-ring: color-mix(in srgb, var(--accent) 80%, transparent);
 }
 
+[data-theme="synthwave"] {
+	--surface-base: linear-gradient(145deg, #1a0a2e 0%, #0d0518 100%);
+	--surface-border: rgba(255, 45, 123, 0.12);
+	--text-heading: #f0e6ff;
+	--text-body: #b8a0d0;
+	--text-muted: #7a5a9a;
+	--accent: #ff2d7b;
+	--led-a: #ff2d7b;
+	--led-b: #00f0ff;
+	--led-c: #39ff14;
+	--led-off: #1a0a2e;
+	--knob-hi: #4a2a6a;
+	--knob-lo: #0d0518;
+	--focus-ring: color-mix(in srgb, var(--accent) 80%, transparent);
+}
+
 [data-theme="graphite"] body::after {
 	content: "";
 	position: fixed;
@@ -49,6 +69,26 @@ body {
 #root {
 	position: relative;
 	z-index: 1;
+	text-shadow: 0 0 calc(var(--crt) * 4px) var(--accent);
+}
+
+/* --- CRT effect layers, intensity controlled by --crt (0–1) --- */
+
+/* Layer 1: Scanlines */
+body::before {
+	content: "";
+	position: fixed;
+	inset: 0;
+	pointer-events: none;
+	z-index: 9000;
+	background: repeating-linear-gradient(
+		to bottom,
+		transparent 0px,
+		transparent 2px,
+		rgba(0, 0, 0, 0.15) 2px,
+		rgba(0, 0, 0, 0.15) 4px
+	);
+	opacity: var(--crt);
 }
 
 * {

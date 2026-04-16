@@ -5,7 +5,11 @@ const STORAGE_KEY = "theme";
 
 const readTheme = (): ThemeEnum => {
 	const fromDom = document.documentElement.dataset.theme;
-	if (fromDom === ThemeEnum.graphite || fromDom === ThemeEnum.mahogany) {
+	if (
+		fromDom === ThemeEnum.graphite ||
+		fromDom === ThemeEnum.mahogany ||
+		fromDom === ThemeEnum.synthwave
+	) {
 		return fromDom;
 	}
 	return ThemeEnum.graphite;

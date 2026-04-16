@@ -17,7 +17,7 @@
 					urlTheme = new URLSearchParams(location.search).get("theme");
 					stored = localStorage.getItem("theme");
 					chosen = urlTheme || stored;
-					if (chosen === "graphite" || chosen === "mahogany") {
+					if (chosen === "graphite" || chosen === "mahogany" || chosen === "synthwave") {
 						document.documentElement.dataset.theme = chosen;
 						if (urlTheme) localStorage.setItem("theme", urlTheme);
 					}
