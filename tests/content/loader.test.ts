@@ -12,9 +12,9 @@ describe("loadAllContent", () => {
 
 	it("loads site copy for every locale", async () => {
 		const content = await loadAllContent();
-		expect(content.site.fr.nav.home).toBe("Accueil");
-		expect(content.site.en.nav.home).toBe("Home");
-		expect(content.site.es.nav.home).toBe("Inicio");
+		expect(content.site.fr.footer.email).toBe("contact@bitcrusher-studio.com");
+		expect(content.site.en.footer.email).toBe("contact@bitcrusher-studio.com");
+		expect(content.site.es.footer.email).toBe("contact@bitcrusher-studio.com");
 	});
 
 	it("loads projects indexed by locale and slug", async () => {

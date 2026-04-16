@@ -23,11 +23,6 @@ collections:
         file: content/site/fr.yml
         format: yaml
         fields: &site_fields
-          - { name: nav, widget: object, fields: [
-              { name: home, widget: string },
-              { name: about, widget: string },
-              { name: works, widget: string }
-            ]}
           - { name: footer, widget: object, fields: [
               { name: email, widget: string },
               { name: copyright, widget: string },

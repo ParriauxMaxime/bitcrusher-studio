@@ -84,11 +84,6 @@ export interface Page extends PageFrontmatter {
 }
 
 export const SiteCopySchema = z.object({
-	nav: z.object({
-		home: z.string(),
-		about: z.string(),
-		works: z.string(),
-	}),
 	footer: z.object({
 		email: z.string().email(),
 		copyright: z.string(),
