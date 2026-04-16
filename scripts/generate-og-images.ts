@@ -28,7 +28,7 @@ const vuLed = (
 	id: string,
 ): string =>
 	lit
-		? `<defs><radialGradient id="${id}" cx="40%" cy="35%" r="60%"><stop offset="0%" stop-color="white" stop-opacity="0.7"/><stop offset="40%" stop-color="${color}"/><stop offset="100%" stop-color="${color}" stop-opacity="0.4"/></radialGradient></defs><circle cx="${x}" cy="${y}" r="8" fill="url(#${id})"/>`
+		? `<defs><radialGradient id="${id}" cx="38%" cy="32%" r="65%"><stop offset="0%" stop-color="white" stop-opacity="0.95"/><stop offset="20%" stop-color="white" stop-opacity="0.5"/><stop offset="50%" stop-color="${color}"/><stop offset="85%" stop-color="${color}" stop-opacity="0.6"/><stop offset="100%" stop-color="#000" stop-opacity="0.3"/></radialGradient></defs><circle cx="${x}" cy="${y}" r="8" fill="url(#${id})"/>`
 		: `<circle cx="${x}" cy="${y}" r="8" fill="#2a3a4a"/>`;
 
 const vuColumn = (x: number, level: number): string => {
