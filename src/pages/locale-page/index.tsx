@@ -16,7 +16,7 @@ import { tokens } from "@/theme/tokens";
 
 const styles = {
 	hero: css`
-		padding: 120px 28px 80px;
+		padding: clamp(120px, 18vh, 240px) 28px 80px;
 		max-width: 1080px;
 		margin: 0 auto;
 		display: flex;
