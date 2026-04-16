@@ -21,7 +21,7 @@ const styles = {
 		margin: 0 auto;
 		display: flex;
 		flex-direction: column;
-		gap: 48px;
+		gap: clamp(24px, 4vw, 56px);
 	`,
 	heroLayout: css`
 		display: flex;
