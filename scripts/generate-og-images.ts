@@ -4,8 +4,6 @@ import { mkdir, readFile, writeFile } from "node:fs/promises";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 import sharp from "sharp";
-import { loadAllContent } from "../src/content/loader";
-import { ALL_LOCALES } from "../src/content/types";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const OG_DIR = join(process.cwd(), "public/og");
@@ -51,7 +49,7 @@ const vuColumn = (x: number, level: number): string => {
 		.join("\n    ");
 };
 
-const template = (title: string, subtitle: string): string => `
+const template = (_title: string, subtitle: string): string => `
 <svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
   <defs>
     <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
@@ -125,7 +123,6 @@ const run = async () => {
 	let cache: CacheMap = {};
 	if (existsSync(CACHE)) cache = JSON.parse(await readFile(CACHE, "utf8"));
 
-	const content = await loadAllContent();
 	let rebuilt = 0;
 	const queue: Array<{ key: string; title: string; subtitle: string }> = [];
 
