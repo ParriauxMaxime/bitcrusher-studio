@@ -6,9 +6,12 @@ import { tokens } from "@/theme/tokens";
 
 const styles = {
 	hero: css`
-		padding: 120px 28px 64px;
+		padding: 120px 28px 80px;
 		max-width: 1080px;
 		margin: 0 auto;
+		display: flex;
+		flex-direction: column;
+		gap: 48px;
 	`,
 	heroLayout: css`
 		display: flex;
@@ -45,26 +48,11 @@ const styles = {
 		max-width: 560px;
 		margin: 0;
 	`,
-	taglineSmall: css`
-		color: ${tokens.text.muted};
-		font-size: 14px;
-		line-height: 1.6;
-		max-width: 560px;
-		margin: 0;
-	`,
 	section: css`
 		padding: 80px 28px;
 		max-width: 1080px;
 		margin: 0 auto;
 		border-top: 1px solid ${tokens.surface.border};
-	`,
-	aboutTitle: css`
-		font-family: "Instrument Serif", Georgia, serif;
-		font-style: italic;
-		font-size: clamp(36px, 5vw, 56px);
-		color: ${tokens.text.heading};
-		letter-spacing: -0.02em;
-		margin: 0 0 28px;
 	`,
 	aboutBody: css`
 		font-size: 16px;
@@ -202,15 +190,8 @@ export const LocalePage = ({
 							Bitcrusher <em>Studio</em>
 						</h1>
 						<p css={styles.taglineLarge}>{site.seo.tagline}</p>
-						{home.body && <p css={styles.taglineSmall}>{home.body}</p>}
 					</div>
 				</div>
-			</section>
-
-			<section css={styles.section} id="about" aria-labelledby="about-heading">
-				<h2 id="about-heading" css={styles.aboutTitle}>
-					{about.title}
-				</h2>
 				<div css={styles.aboutBody}>{about.body}</div>
 			</section>
 
