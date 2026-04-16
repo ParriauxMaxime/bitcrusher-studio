@@ -1,9 +1,16 @@
 import { css } from "@emotion/react";
 import { useTranslation } from "react-i18next";
-import { AudioPlayer } from "@/components/audio-player";
+import { EmbedPlayer } from "@/components/audio-player/embed-player";
 import type { CarouselItem } from "@/components/carousel/carousel";
 import { Carousel } from "@/components/carousel/carousel";
-import type { LocaleEnum, Page, Project, SiteCopy } from "@/content/types";
+import { MusicSet } from "@/components/music-set";
+import type {
+	AudioSource,
+	LocaleEnum,
+	Page,
+	Project,
+	SiteCopy,
+} from "@/content/types";
 import { tokens } from "@/theme/tokens";
 
 const styles = {
@@ -170,7 +177,7 @@ export interface LocalePageProps {
 
 export const LocalePage = ({
 	locale: _locale,
-	home,
+	home: _home,
 	about,
 	projects,
 	site,
@@ -243,11 +250,26 @@ export const LocalePage = ({
 											<Carousel items={carouselItems} />
 										) : null;
 									})()}
-									{p.audio.filter((a) => a.kind !== "youtube").length > 0 && (
-										<AudioPlayer
-											sources={p.audio.filter((a) => a.kind !== "youtube")}
-										/>
-									)}
+									{(() => {
+										const fileAudio = p.audio.filter(
+											(a): a is Extract<AudioSource, { kind: "file" }> =>
+												a.kind === "file",
+										);
+										const embedAudio = p.audio.filter(
+											(a): a is Extract<AudioSource, { kind: "soundcloud" }> =>
+												a.kind === "soundcloud",
+										);
+										return (
+											<>
+												{fileAudio.length > 0 && (
+													<MusicSet sources={fileAudio} />
+												)}
+												{embedAudio.map((a) => (
+													<EmbedPlayer key={a.url} source={a} />
+												))}
+											</>
+										);
+									})()}
 									{p.links.length > 0 && (
 										<div css={styles.linkList}>
 											{p.links.map((l) => (
