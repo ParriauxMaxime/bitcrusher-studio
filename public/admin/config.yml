@@ -65,7 +65,17 @@ collections:
 
   - name: projects
     label: Projects
-    folder: content/works
+    folder: content/projects/fr
+    extension: md
+    format: frontmatter
+    create: true
+    fields:
+      - { name: title, widget: string }
+      - { name: body, widget: markdown }
+
+  - name: projects_full
+    label: Projects (debug)
+    folder: content/projects/fr
     extension: md
     format: frontmatter
     create: true
