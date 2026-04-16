@@ -56,6 +56,7 @@ collections:
     label: Pages
     i18n: true
     folder: content/pages
+    path: "{{slug}}"
     extension: md
     format: frontmatter
     create: true
@@ -69,6 +70,7 @@ collections:
     label: Projects
     i18n: true
     folder: content/projects
+    path: "{{slug}}"
     extension: md
     format: frontmatter
     create: true
