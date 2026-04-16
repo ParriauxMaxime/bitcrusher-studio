@@ -6,7 +6,7 @@ backend:
   auth_endpoint: auth
 
 media_folder: public/media
-public_folder: /media
+public_folder: /bitcrusher-studio/media
 
 i18n:
   structure: multiple_folders
