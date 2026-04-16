@@ -1,6 +1,6 @@
 import { css } from "@emotion/react";
 import { useEffect, useRef, useState } from "react";
-import { useCrt } from "@/theme/crt-effects";
+import { CRT_LABELS, CRT_LAYERS, useCrt } from "@/theme/crt-effects";
 import { ALL_THEMES, type ThemeEnum, tokens } from "@/theme/tokens";
 import { useTheme } from "@/theme/use-theme";
 
@@ -111,6 +111,14 @@ const styles = {
 		right: 0;
 		text-align: center;
 	`,
+	sliderLabel: css`
+		font-family: "JetBrains Mono", ui-monospace, monospace;
+		font-size: 8px;
+		letter-spacing: 0.15em;
+		text-transform: uppercase;
+		color: ${tokens.text.muted};
+		min-width: 56px;
+	`,
 	sliderRow: css`
 		display: flex;
 		align-items: center;
@@ -152,7 +160,7 @@ const styles = {
 
 export const ThemeSwitcherDev = () => {
 	const { theme, setTheme, cycleTheme } = useTheme();
-	const { intensity, setIntensity } = useCrt();
+	const { state: crt, setLayer } = useCrt();
 	const [open, setOpen] = useState(false);
 	const wrapperRef = useRef<HTMLDivElement>(null);
 
@@ -209,19 +217,22 @@ export const ThemeSwitcherDev = () => {
 							</button>
 						))}
 					</div>
-					<div css={styles.label}>CRT</div>
-					<div css={styles.sliderRow}>
-						<input
-							type="range"
-							min={0}
-							max={100}
-							value={intensity}
-							onChange={(e) => setIntensity(Number(e.target.value))}
-							css={styles.slider}
-							aria-label="CRT effect intensity"
-						/>
-						<span css={styles.sliderValue}>{intensity}%</span>
-					</div>
+					<div css={styles.label}>CRT Effects</div>
+					{CRT_LAYERS.map((layer) => (
+						<div key={layer} css={styles.sliderRow}>
+							<span css={styles.sliderLabel}>{CRT_LABELS[layer]}</span>
+							<input
+								type="range"
+								min={0}
+								max={100}
+								value={crt[layer]}
+								onChange={(e) => setLayer(layer, Number(e.target.value))}
+								css={styles.slider}
+								aria-label={`${CRT_LABELS[layer]} intensity`}
+							/>
+							<span css={styles.sliderValue}>{crt[layer]}%</span>
+						</div>
+					))}
 				</div>
 			)}
 			<button
