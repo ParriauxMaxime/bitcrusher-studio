@@ -21,7 +21,7 @@ const styles = {
 		margin: 0 auto;
 		display: flex;
 		flex-direction: column;
-		gap: clamp(24px, 4vw, 56px);
+		gap: clamp(16px, 4vw, 56px);
 	`,
 	heroLayout: css`
 		display: flex;
@@ -172,11 +172,6 @@ const splitTitle = (title: string): { head: string; tail: string } => {
 	if (parts.length < 2) return { head: "", tail: title };
 	const tail = parts.pop() ?? "";
 	return { head: parts.join(" "), tail };
-};
-
-const channelLabel = (project: Project): string => {
-	const role = project.roles[0] ?? "sound_design";
-	return `CH_${String(project.order).padStart(2, "0")} · ${role.replace(/_/g, " ").toUpperCase()}`;
 };
 
 const metaLabel = (project: Project): string => {
