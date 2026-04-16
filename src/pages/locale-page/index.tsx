@@ -18,6 +18,7 @@ const styles = {
 		align-items: center;
 		gap: 48px;
 		flex-wrap: wrap;
+		flex-direction: row-reverse;
 	`,
 	avatar: css`
 		flex: 0 0 auto;
@@ -55,7 +56,7 @@ const styles = {
 		border-top: 1px solid ${tokens.surface.border};
 	`,
 	aboutBody: css`
-		font-size: 16px;
+		font-size: 18px;
 		line-height: 1.75;
 		color: ${tokens.text.body};
 		max-width: 720px;
