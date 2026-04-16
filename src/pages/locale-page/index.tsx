@@ -198,15 +198,13 @@ const metaLabel = (project: Project): string => {
 export interface LocalePageProps {
 	locale: LocaleEnum;
 	home: Page;
-	about: Page;
 	projects: Project[];
 	site: SiteCopy;
 }
 
 export const LocalePage = ({
 	locale: _locale,
-	home: _home,
-	about,
+	home,
 	projects,
 	site,
 }: LocalePageProps) => {
@@ -218,7 +216,7 @@ export const LocalePage = ({
 				<div css={styles.heroLayout}>
 					<img
 						css={styles.avatar}
-						src={asset("/media/avatar.svg")}
+						src={asset(site.hero?.avatar ?? "/media/avatar.svg")}
 						alt="Quentin Ferreira-Castiço"
 						width={220}
 						height={220}
@@ -230,7 +228,7 @@ export const LocalePage = ({
 						<p css={styles.taglineLarge}>{site.seo.tagline}</p>
 					</div>
 				</div>
-				<div css={styles.aboutBody}>{about.body}</div>
+				<div css={styles.aboutBody}>{home.body}</div>
 			</section>
 
 			<section css={styles.section} id="works">

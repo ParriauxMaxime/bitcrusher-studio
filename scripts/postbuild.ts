@@ -17,16 +17,27 @@ const DIST = join(process.cwd(), "dist");
 
 const setupJsdomGlobals = (url: string): void => {
 	const dom = new JSDOM("<!doctype html><html><body></body></html>", { url });
-	const g = globalThis as unknown as {
-		window: typeof dom.window;
-		document: Document;
-		navigator: Navigator;
-		location: Location;
+	const props = {
+		window: { value: dom.window, writable: true, configurable: true },
+		document: {
+			value: dom.window.document,
+			writable: true,
+			configurable: true,
+		},
+		navigator: {
+			value: dom.window.navigator,
+			writable: true,
+			configurable: true,
+		},
+		location: {
+			value: dom.window.location,
+			writable: true,
+			configurable: true,
+		},
 	};
-	g.window = dom.window;
-	g.document = dom.window.document;
-	g.navigator = dom.window.navigator;
-	g.location = dom.window.location;
+	for (const [key, desc] of Object.entries(props)) {
+		Object.defineProperty(globalThis, key, desc);
+	}
 	dom.window.document.documentElement.dataset.theme = "graphite";
 };
 

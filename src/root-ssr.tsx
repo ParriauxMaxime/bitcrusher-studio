@@ -50,9 +50,8 @@ export const RootSSR = ({ routePath }: RootSSRProps) => {
 			(rawLocale: string) => {
 				const locale = rawLocale as LocaleEnum;
 				const home = content.pages[locale].home;
-				const about = content.pages[locale].about;
 				const site = content.site[locale];
-				if (!home || !about) return <NotFound locale={locale} />;
+				if (!home) return <NotFound locale={locale} />;
 				const projects = Object.values(content.projects[locale]).sort(
 					(a, b) => b.year - a.year || a.order - b.order,
 				);
@@ -78,7 +77,6 @@ export const RootSSR = ({ routePath }: RootSSRProps) => {
 							<LocalePage
 								locale={locale}
 								home={home}
-								about={about}
 								projects={projects}
 								site={site}
 							/>

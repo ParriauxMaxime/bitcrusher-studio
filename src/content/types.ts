@@ -84,6 +84,11 @@ export interface Page extends PageFrontmatter {
 }
 
 export const SiteCopySchema = z.object({
+	hero: z
+		.object({
+			avatar: z.string().default("/media/avatar.svg"),
+		})
+		.default({}),
 	footer: z.object({
 		email: z.string().email(),
 		copyright: z.string(),

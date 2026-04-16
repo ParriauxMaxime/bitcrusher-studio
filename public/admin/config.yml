@@ -24,6 +24,9 @@ collections:
     format: yaml
     create: false
     fields:
+      - { name: hero, widget: object, i18n: duplicate, fields: [
+          { name: avatar, widget: image }
+        ]}
       - { name: footer, widget: object, i18n: true, fields: [
           { name: email, widget: string, i18n: duplicate },
           { name: copyright, widget: string, i18n: true },
