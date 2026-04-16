@@ -54,7 +54,7 @@ const styles = {
 	brand: css`
 		font-family: "Instrument Serif", Georgia, serif;
 		font-style: italic;
-		font-size: clamp(42px, 6vw, 88px);
+		font-size: clamp(48px, 7vw, 100px);
 		color: ${tokens.text.heading};
 		line-height: 1;
 		letter-spacing: -0.03em;
