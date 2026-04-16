@@ -409,7 +409,7 @@ export const MusicSet = ({ sources }: MusicSetProps) => {
 								aria-current={active}
 							>
 								<span css={styles.trackIcon} aria-hidden="true">
-									{active && state.playing ? "❚❚" : "▶"}
+									{active && state.playing ? "⏸" : "▶"}
 								</span>
 								<span css={styles.trackTitle}>{s.title}</span>
 								{s.duration !== undefined && (
@@ -443,7 +443,7 @@ export const MusicSet = ({ sources }: MusicSetProps) => {
 							onClick={toggle}
 							aria-label={state.playing ? "Pause" : "Play"}
 						>
-							{state.playing ? "❚❚" : "▶"}
+							{state.playing ? "⏸" : "▶"}
 						</button>
 						<span css={styles.time}>
 							{fmt(state.time)} / {fmt(state.duration)}
