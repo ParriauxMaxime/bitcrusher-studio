@@ -1,11 +1,11 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
 	<rect width="32" height="32" rx="6" fill="#1b2838"/>
-	<!-- Row 1 (top) - red - off/off -->
+	<!-- Row 1 (top) - red - off/lit -->
 	<circle cx="12" cy="5" r="2.5" fill="#2a3a4a"/>
-	<circle cx="20" cy="5" r="2.5" fill="#2a3a4a"/>
-	<!-- Row 2 - yellow - lit/off -->
+	<circle cx="20" cy="5" r="2.5" fill="#ff5a4a"/>
+	<!-- Row 2 - yellow - lit/lit -->
 	<circle cx="12" cy="11" r="2.5" fill="#e8b62a"/>
-	<circle cx="20" cy="11" r="2.5" fill="#2a3a4a"/>
+	<circle cx="20" cy="11" r="2.5" fill="#e8b62a"/>
 	<!-- Row 3 - yellow - lit/lit -->
 	<circle cx="12" cy="17" r="2.5" fill="#e8b62a"/>
 	<circle cx="20" cy="17" r="2.5" fill="#e8b62a"/>

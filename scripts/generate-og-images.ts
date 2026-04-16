@@ -1,13 +1,16 @@
 import { createHash } from "node:crypto";
 import { existsSync } from "node:fs";
 import { mkdir, readFile, writeFile } from "node:fs/promises";
-import { join } from "node:path";
+import { dirname, join } from "node:path";
+import { fileURLToPath } from "node:url";
 import sharp from "sharp";
 import { loadAllContent } from "../src/content/loader";
 import { ALL_LOCALES } from "../src/content/types";
 
+const __dirname = dirname(fileURLToPath(import.meta.url));
 const OG_DIR = join(process.cwd(), "public/og");
 const CACHE = join(OG_DIR, ".cache.json");
+const FONT_PATH = join(__dirname, "instrument-serif-italic.ttf");
 
 const xmlEscape = (s: string): string =>
 	s
@@ -44,15 +47,23 @@ const template = (title: string, subtitle: string): string => `
       <stop offset="0" stop-color="#1b2838"/>
       <stop offset="1" stop-color="#171a21"/>
     </linearGradient>
+    <style>
+      @font-face {
+        font-family: 'Instrument Serif';
+        font-style: italic;
+        font-weight: 400;
+        src: url(data:font/truetype;base64,FONT_BASE64) format('truetype');
+      }
+    </style>
   </defs>
   <rect width="1200" height="630" fill="url(#g)"/>
 
   <!-- Brand (hero style) -->
-  <text x="80" y="260" font-family="Georgia, serif" font-style="italic" font-size="120" font-weight="400" fill="#e5e5e5">Bitcrusher</text>
-  <text x="700" y="260" font-family="Georgia, serif" font-style="italic" font-size="120" font-weight="400" fill="#66c0f4">Studio</text>
+  <text x="80" y="260" font-family="Instrument Serif, Georgia, serif" font-style="italic" font-size="120" font-weight="400" fill="#e5e5e5">Bitcrusher</text>
+  <text x="700" y="260" font-family="Instrument Serif, Georgia, serif" font-style="italic" font-size="120" font-weight="400" fill="#66c0f4">Studio</text>
 
   <!-- Tagline -->
-  <text x="80" y="340" font-family="sans-serif" font-size="30" fill="#acb2b8">${xmlEscape(subtitle.slice(0, 70))}</text>
+  <text x="80" y="340" font-family="Inter, sans-serif" font-size="30" fill="#acb2b8">${xmlEscape(subtitle.slice(0, 70))}</text>
 
   <!-- VU meter decoration (right side) -->
   <g>
@@ -68,6 +79,7 @@ interface CacheMap {
 
 const run = async () => {
 	await mkdir(OG_DIR, { recursive: true });
+	const fontB64 = (await readFile(FONT_PATH)).toString("base64");
 	let cache: CacheMap = {};
 	if (existsSync(CACHE)) cache = JSON.parse(await readFile(CACHE, "utf8"));
 
@@ -82,7 +94,7 @@ const run = async () => {
 	});
 
 	for (const { key, title, subtitle } of queue) {
-		const svg = template(title, subtitle);
+		const svg = template(title, subtitle).replace("FONT_BASE64", fontB64);
 		const hash = createHash("md5").update(svg).digest("hex").slice(0, 12);
 		if (cache[key] === hash) continue;
 		const out = join(OG_DIR, `${key}.png`);
