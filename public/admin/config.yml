@@ -19,7 +19,7 @@ collections:
     label: Settings
     i18n: true
     folder: content/site
-    path: "{{slug}}"
+    path: "{{locale}}/{{slug}}"
     extension: yml
     format: yaml
     create: false
@@ -52,7 +52,7 @@ collections:
     label: Pages
     i18n: true
     folder: content/pages
-    path: "{{slug}}"
+    path: "{{locale}}/{{slug}}"
     extension: md
     format: frontmatter
     create: true
@@ -66,7 +66,7 @@ collections:
     label: Projects
     i18n: true
     folder: content/projects
-    path: "{{slug}}"
+    path: "{{locale}}/{{slug}}"
     extension: md
     format: frontmatter
     create: true
