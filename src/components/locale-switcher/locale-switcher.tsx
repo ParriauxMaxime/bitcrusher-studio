@@ -7,7 +7,7 @@ const styles = {
 		position: fixed;
 		top: 16px;
 		right: 16px;
-		z-index: 9001;
+		z-index: 9999;
 		display: flex;
 		gap: 6px;
 		background: rgba(0, 0, 0, 0.35);
