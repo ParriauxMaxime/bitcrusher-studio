@@ -58,11 +58,31 @@ const template = (title: string, subtitle: string): string => `
   </defs>
   <rect width="1200" height="630" fill="url(#g)"/>
 
-  <!-- Brand (hero style) -->
-  <text x="80" y="260" font-family="Instrument Serif, Georgia, serif" font-style="italic" font-size="120" font-weight="400" fill="#e5e5e5">Bitcrusher <tspan fill="#66c0f4">Studio</tspan></text>
+  <!-- Scanlines overlay -->
+  <defs>
+    <pattern id="scanlines" width="4" height="4" patternUnits="userSpaceOnUse">
+      <rect width="4" height="2" fill="transparent"/>
+      <rect y="2" width="4" height="2" fill="rgba(0,0,0,0.08)"/>
+    </pattern>
+  </defs>
+  <rect width="1200" height="630" fill="url(#scanlines)"/>
+
+  <!-- Vignette -->
+  <radialGradient id="vig" cx="50%" cy="50%" r="70%">
+    <stop offset="0%" stop-color="transparent"/>
+    <stop offset="100%" stop-color="rgba(0,0,0,0.5)"/>
+  </radialGradient>
+  <rect width="1200" height="630" fill="url(#vig)"/>
+
+  <!-- Brand (hero style, bigger) -->
+  <text x="80" y="300" font-family="Instrument Serif, Georgia, serif" font-style="italic" font-size="160" font-weight="400" fill="#e5e5e5">Bitcrusher <tspan fill="#66c0f4">Studio</tspan></text>
+
+  <!-- Chromatic aberration on brand -->
+  <text x="78" y="300" font-family="Instrument Serif, Georgia, serif" font-style="italic" font-size="160" font-weight="400" fill="rgba(255,90,74,0.15)">Bitcrusher <tspan fill="rgba(255,90,74,0.15)">Studio</tspan></text>
+  <text x="82" y="300" font-family="Instrument Serif, Georgia, serif" font-style="italic" font-size="160" font-weight="400" fill="rgba(102,192,244,0.15)">Bitcrusher <tspan fill="rgba(102,192,244,0.15)">Studio</tspan></text>
 
   <!-- Tagline -->
-  <text x="80" y="340" font-family="Inter, sans-serif" font-size="30" fill="#acb2b8">${xmlEscape(subtitle.slice(0, 70))}</text>
+  <text x="80" y="400" font-family="Inter, sans-serif" font-size="36" fill="#acb2b8">${xmlEscape(subtitle.slice(0, 70))}</text>
 
   <!-- VU meter decoration (right side) -->
   <g>
