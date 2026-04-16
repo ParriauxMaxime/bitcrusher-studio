@@ -218,7 +218,7 @@ export const LocalePage = ({
 				<div css={styles.heroLayout}>
 					<img
 						css={styles.avatar}
-						src={asset("/media/avatar.png")}
+						src={asset("/media/avatar.svg")}
 						alt="Quentin Ferreira-Castiço"
 						width={220}
 						height={220}
