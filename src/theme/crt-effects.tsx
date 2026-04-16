@@ -4,7 +4,7 @@ export const CRT_LAYERS = [
 	"scanlines",
 	"glow",
 	"aberration",
-	"barrel",
+	"vignette",
 	"flicker",
 ] as const;
 export type CrtLayer = (typeof CRT_LAYERS)[number];
@@ -13,7 +13,7 @@ export const CRT_LABELS: Record<CrtLayer, string> = {
 	scanlines: "Scanlines",
 	glow: "Glow",
 	aberration: "Chromatic",
-	barrel: "Barrel",
+	vignette: "Vignette",
 	flicker: "Flicker",
 };
 
@@ -25,7 +25,7 @@ const defaultState = (): CrtState => ({
 	scanlines: 0,
 	glow: 0,
 	aberration: 0,
-	barrel: 0,
+	vignette: 0,
 	flicker: 0,
 });
 
@@ -99,103 +99,106 @@ export const CrtEffects = () => {
 	const sc = state.scanlines / 100;
 	const gl = state.glow / 100;
 	const ab = state.aberration / 100;
-	const ba = state.barrel / 100;
+	const vi = state.vignette / 100;
 	const fl = state.flicker / 100;
 
 	return (
-		<>
-			{ba > 0 && (
-				<svg
-					xmlns="http://www.w3.org/2000/svg"
-					style={{ position: "absolute", width: 0, height: 0 }}
-					aria-hidden="true"
-				>
-					<defs>
-						<filter id="crt-barrel">
-							<feTurbulence
-								type="turbulence"
-								baseFrequency={0.01 * ba}
-								numOctaves={1}
-								result="warp"
-							/>
-							<feDisplacementMap
-								in="SourceGraphic"
-								in2="warp"
-								scale={8 * ba}
-								xChannelSelector="R"
-								yChannelSelector="G"
-							/>
-						</filter>
-					</defs>
-				</svg>
-			)}
-			<style>{`
-				${
-					sc > 0
-						? `body::before {
-					content: "";
-					position: fixed;
-					inset: 0;
-					pointer-events: none;
-					z-index: 9000;
-					background: repeating-linear-gradient(
-						to bottom,
-						transparent 0px,
-						transparent 2px,
-						rgba(0, 0, 0, 0.15) 2px,
-						rgba(0, 0, 0, 0.15) 4px
-					);
-					opacity: ${sc};
-				}`
-						: ""
-				}
-				${
-					gl > 0
-						? `#root {
-					text-shadow: 0 0 ${4 * gl}px var(--accent);
-				}`
-						: ""
-				}
-				${
-					ab > 0
-						? `h1, h2, h3 {
-					text-shadow:
-						${-2 * ab}px 0 rgba(255, 45, 123, ${0.5 * ab}),
-						${2 * ab}px 0 rgba(0, 240, 255, ${0.5 * ab}) !important;
-				}`
-						: ""
-				}
-				${
-					ba > 0
-						? `#root {
-					filter: url(#crt-barrel);
-				}`
-						: ""
-				}
-				${
-					fl > 0
-						? `@keyframes crt-flicker {
-					0%, 100% { opacity: 1; }
-					3% { opacity: ${1 - 0.15 * fl}; }
-					6% { opacity: 1; }
-					48% { opacity: 1; }
-					50% { opacity: ${1 - 0.2 * fl}; }
-					52% { opacity: 1; }
-					97% { opacity: 1; }
-					98% { opacity: ${1 - 0.1 * fl}; }
-				}
-				body::after {
-					content: "";
-					position: fixed;
-					inset: 0;
-					pointer-events: none;
-					z-index: 9000;
-					background: rgba(0, 0, 0, 0.03);
-					animation: crt-flicker ${2 + (1 - fl) * 3}s infinite;
-				}`
-						: ""
-				}
-			`}</style>
-		</>
+		<style>{`
+			${
+				sc > 0
+					? `body::before {
+				content: "";
+				position: fixed;
+				inset: 0;
+				pointer-events: none;
+				z-index: 9000;
+				background: repeating-linear-gradient(
+					to bottom,
+					transparent 0px,
+					transparent 2px,
+					rgba(0, 0, 0, 0.15) 2px,
+					rgba(0, 0, 0, 0.15) 4px
+				);
+				opacity: ${sc};
+			}`
+					: ""
+			}
+			${
+				gl > 0
+					? `#root {
+				text-shadow: 0 0 ${4 * gl}px var(--accent);
+			}`
+					: ""
+			}
+			${
+				ab > 0
+					? `h1, h2, h3 {
+				text-shadow:
+					${-2 * ab}px 0 rgba(255, 45, 123, ${0.5 * ab}),
+					${2 * ab}px 0 rgba(0, 240, 255, ${0.5 * ab}) !important;
+			}`
+					: ""
+			}
+			${
+				vi > 0
+					? `.crt-vignette {
+				content: "";
+				position: fixed;
+				inset: 0;
+				pointer-events: none;
+				z-index: 8999;
+				background: radial-gradient(
+					ellipse at center,
+					transparent ${60 - 20 * vi}%,
+					rgba(0, 0, 0, ${0.6 * vi}) 100%
+				);
+				border-radius: ${2 * vi}%;
+			}`
+					: ""
+			}
+			${
+				fl > 0
+					? `@keyframes crt-flicker {
+				0% { opacity: 1; }
+				4% { opacity: ${1 - 0.08 * fl}; }
+				8% { opacity: 1; }
+				18% { opacity: ${1 - 0.04 * fl}; }
+				20% { opacity: 1; }
+				48% { opacity: 1; }
+				50% { opacity: ${1 - 0.12 * fl}; }
+				53% { opacity: 1; }
+				82% { opacity: 1; }
+				84% { opacity: ${1 - 0.06 * fl}; }
+				87% { opacity: 1; }
+				100% { opacity: 1; }
+			}
+			body {
+				animation: crt-flicker ${1.5 + (1 - fl) * 2}s steps(1) infinite;
+			}`
+					: ""
+			}
+		`}</style>
+	);
+};
+
+/**
+ * Vignette overlay — rendered as a div so z-index works properly.
+ * Must be placed inside Layout, outside #root stacking context.
+ */
+export const CrtVignetteOverlay = () => {
+	const { state } = useCrt();
+	if (state.vignette === 0) return null;
+	return (
+		<div
+			className="crt-vignette"
+			style={{
+				position: "fixed",
+				inset: 0,
+				pointerEvents: "none",
+				zIndex: 8999,
+				background: `radial-gradient(ellipse at center, transparent ${60 - 20 * (state.vignette / 100)}%, rgba(0, 0, 0, ${0.6 * (state.vignette / 100)}) 100%)`,
+				borderRadius: `${2 * (state.vignette / 100)}%`,
+			}}
+		/>
 	);
 };

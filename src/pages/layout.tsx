@@ -4,7 +4,7 @@ import { Footer } from "@/components/shell/footer";
 import { SkipLink } from "@/components/shell/skip-link";
 import { ThemeSwitcherDev } from "@/components/theme-switcher-dev/theme-switcher-dev";
 import type { SiteCopy } from "@/content/types";
-import { CrtEffects } from "@/theme/crt-effects";
+import { CrtEffects, CrtVignetteOverlay } from "@/theme/crt-effects";
 import { tokens } from "@/theme/tokens";
 
 const styles = {
@@ -23,6 +23,7 @@ export const Layout = ({ site, children }: LayoutProps) => (
 	<>
 		<SkipLink />
 		<CrtEffects />
+		<CrtVignetteOverlay />
 		<main id="main" css={styles.main}>
 			{children}
 		</main>
