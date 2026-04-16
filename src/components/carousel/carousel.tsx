@@ -4,7 +4,8 @@ import { tokens } from "@/theme/tokens";
 
 export type CarouselItem =
 	| { kind: "image"; src: string; alt: string }
-	| { kind: "youtube"; url: string; title: string };
+	| { kind: "youtube"; url: string; title: string }
+	| { kind: "video"; src: string; title: string };
 
 export interface CarouselProps {
 	items: CarouselItem[];
@@ -142,7 +143,11 @@ export const Carousel = ({ items }: CarouselProps) => {
 			>
 				{items.map((item) => (
 					<div
-						key={item.kind === "image" ? item.src : item.url}
+						key={
+							item.kind === "image" || item.kind === "video"
+								? item.src
+								: item.url
+						}
 						css={styles.slide}
 					>
 						{item.kind === "image" ? (
@@ -151,6 +156,21 @@ export const Carousel = ({ items }: CarouselProps) => {
 								src={item.src}
 								alt={item.alt}
 								loading="lazy"
+							/>
+						) : item.kind === "video" ? (
+							// biome-ignore lint/a11y/useMediaCaption: captions not required for user-supplied local video slides
+							<video
+								src={item.src}
+								title={item.title}
+								controls
+								preload="metadata"
+								css={styles.image}
+								style={{
+									width: "100%",
+									maxHeight: "400px",
+									objectFit: "contain",
+									background: "#000",
+								}}
 							/>
 						) : (
 							<div css={styles.iframeWrapper}>
@@ -196,7 +216,11 @@ export const Carousel = ({ items }: CarouselProps) => {
 				<div css={styles.dots} role="tablist" aria-label="Slides">
 					{items.map((item, i) => (
 						<button
-							key={item.kind === "image" ? item.src : item.url}
+							key={
+								item.kind === "image" || item.kind === "video"
+									? item.src
+									: item.url
+							}
 							type="button"
 							role="tab"
 							aria-selected={i === index}
