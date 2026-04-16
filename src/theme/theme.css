@@ -95,6 +95,10 @@ body {
 	background: var(--knob-lo);
 }
 
+::-webkit-scrollbar-button {
+	display: none;
+}
+
 html,
 body {
 	margin: 0;
