@@ -14,6 +14,4 @@ links:
 collaborators: [Objectif 3D, ACFA Multimédia]
 ---
 
-<!-- TRANSLATION PENDING — EN -->
-
-Projet réalisé en collaboration avec l'école Objectif 3D lors de mon année de spécialisation à ACFA Multimédia. Shooter à la 3ème personne dans un univers SF et Cartoon — sound design en collaboration avec un autre sound designer.
+Project made in collaboration with Objectif 3D during my specialization year at ACFA Multimédia. Third-person shooter set in a sci-fi cartoon universe — sound design in collaboration with another sound designer.

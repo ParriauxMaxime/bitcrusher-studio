@@ -5,13 +5,11 @@ order: 3
 featured: true
 year: 2021
 roles: [sound_design, music_composition]
-tags: [trailer, rogue-lite, multijoueur]
+tags: [trailer, rogue-lite, multiplayer]
 cover: /media/projects/lost-in-zbeul/cover.jpg
 audio: []
 links: []
 collaborators: []
 ---
 
-<!-- TRANSLATION PENDING — EN -->
-
-Trailer réalisé pour la présentation d'un Rogue-Lite multijoueur s'inspirant du jeu de plateau Labyrinthe, pour la Game Cup 2021. Bruitages et musique réalisés par mes soins.
+Trailer produced for the presentation of a multiplayer rogue-lite inspired by the Labyrinth board game, for Game Cup 2021. Sound effects and music created by myself.

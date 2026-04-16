@@ -5,7 +5,7 @@ order: 1
 featured: true
 year: 2022
 roles: [sound_design]
-tags: [shooter, sf, collaboration]
+tags: [shooter, ciencia ficción, colaboración]
 cover: /media/projects/space-piercer/cover.jpg
 audio: []
 links:
@@ -14,6 +14,4 @@ links:
 collaborators: [Objectif 3D, ACFA Multimédia]
 ---
 
-<!-- TRANSLATION PENDING — ES -->
-
-Projet réalisé en collaboration avec l'école Objectif 3D lors de mon année de spécialisation à ACFA Multimédia. Shooter à la 3ème personne dans un univers SF et Cartoon — sound design en collaboration avec un autre sound designer.
+Proyecto realizado en colaboración con la escuela Objectif 3D durante mi año de especialización en ACFA Multimédia. Shooter en tercera persona en un universo de ciencia ficción y cartoon — diseño sonoro en colaboración con otro diseñador de sonido.

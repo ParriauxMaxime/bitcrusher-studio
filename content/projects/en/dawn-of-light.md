@@ -14,6 +14,4 @@ links:
 collaborators: [Objectif 3D, ACFA Multimédia]
 ---
 
-<!-- TRANSLATION PENDING — EN -->
-
-Projet en partenariat avec l'école Objectif 3D et ACFA Multimédia. Composition et intégration de la musique In Game, réalisation musique et sound design du trailer (hors SFX In Game). Playlist de musiques non dynamiques réalisées pour le jeu disponible sur demande.
+Project in partnership with Objectif 3D and ACFA Multimédia. Composition and integration of in-game music, production of trailer music and sound design (excluding in-game SFX). Playlist of non-dynamic music created for the game available upon request.
