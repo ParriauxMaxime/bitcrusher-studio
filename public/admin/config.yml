@@ -31,7 +31,7 @@ collections:
               { name: email, widget: string },
               { name: copyright, widget: string },
               { name: socials, widget: list, fields: [
-                  { name: kind, widget: select, options: [soundcloud, youtube, linkedin] },
+                  { name: kind, widget: select, options: [soundcloud, youtube, linkedin, malt] },
                   { name: url, widget: string },
                   { name: label, widget: string }
                 ]}
@@ -55,7 +55,6 @@ collections:
     label: Pages
     i18n: true
     folder: content/pages
-    path: "{{locale}}/{{slug}}"
     extension: md
     format: frontmatter
     create: true
@@ -69,7 +68,6 @@ collections:
     label: Projects
     i18n: true
     folder: content/projects
-    path: "{{locale}}/{{slug}}"
     extension: md
     format: frontmatter
     create: true
@@ -83,6 +81,7 @@ collections:
           options: [sound_design, music_composition, mixing, mastering, integration] }
       - { name: tags, widget: list, default: [], i18n: duplicate }
       - { name: cover, widget: image, i18n: duplicate }
+      - { name: images, widget: list, default: [], i18n: duplicate, field: { name: path, widget: image } }
       - { name: audio, widget: list, default: [], i18n: duplicate, fields: [
           { name: kind, widget: select, options: [file, soundcloud, youtube] },
           { name: src, widget: string, required: false },
