@@ -1,6 +1,6 @@
 ---
 slug: lost-in-zbeul
-title: Lost In Zbeul — Game Cup 2021
+title: Lost In Zbeul
 order: 3
 featured: true
 year: 2021
