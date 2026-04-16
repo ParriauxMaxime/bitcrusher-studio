@@ -176,6 +176,9 @@ const styles = {
 	`,
 };
 
+/** Strip leading / so <base> tag resolves paths correctly */
+const rel = (path: string) => (path.startsWith("/") ? path.slice(1) : path);
+
 const splitTitle = (title: string): { head: string; tail: string } => {
 	const parts = title.trim().split(" ");
 	if (parts.length < 2) return { head: "", tail: title };
@@ -213,7 +216,7 @@ export const LocalePage = ({
 				<div css={styles.heroLayout}>
 					<img
 						css={styles.avatar}
-						src="/media/avatar.png"
+						src="media/avatar.png"
 						alt="Quentin Ferreira-Castiço"
 						width={220}
 						height={220}
@@ -258,11 +261,15 @@ export const LocalePage = ({
 												VIDEO_EXT.test(src)
 													? {
 															kind: "video" as const,
-															src,
+															src: rel(src),
 															title: p.title,
-															poster: p.cover,
+															poster: rel(p.cover),
 														}
-													: { kind: "image" as const, src, alt: p.title },
+													: {
+															kind: "image" as const,
+															src: rel(src),
+															alt: p.title,
+														},
 										);
 										const videoItems: CarouselItem[] = p.audio
 											.filter((a) => a.kind === "youtube")
@@ -281,10 +288,12 @@ export const LocalePage = ({
 										) : null;
 									})()}
 									{(() => {
-										const fileAudio = p.audio.filter(
-											(a): a is Extract<AudioSource, { kind: "file" }> =>
-												a.kind === "file",
-										);
+										const fileAudio = p.audio
+											.filter(
+												(a): a is Extract<AudioSource, { kind: "file" }> =>
+													a.kind === "file",
+											)
+											.map((a) => ({ ...a, src: rel(a.src) }));
 										const embedAudio = p.audio.filter(
 											(a): a is Extract<AudioSource, { kind: "soundcloud" }> =>
 												a.kind === "soundcloud",

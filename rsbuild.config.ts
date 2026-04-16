@@ -12,6 +12,16 @@ export default defineConfig({
 	},
 	html: {
 		template: "./src/index.html",
+		tags: basePath
+			? [
+					{
+						tag: "base",
+						attrs: { href: `${basePath}/` },
+						head: true,
+						append: false,
+					},
+				]
+			: [],
 	},
 	server: {
 		port: 3000,
