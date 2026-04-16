@@ -4,6 +4,7 @@ import { EmbedPlayer } from "@/components/audio-player/embed-player";
 import type { CarouselItem } from "@/components/carousel/carousel";
 import { Carousel } from "@/components/carousel/carousel";
 import { MusicSet } from "@/components/music-set";
+import { Reveal } from "@/components/reveal/reveal";
 import type {
 	AudioSource,
 	LocaleEnum,
@@ -187,22 +188,26 @@ export const LocalePage = ({
 	return (
 		<>
 			<section css={styles.hero} id="hero">
-				<div css={styles.heroLayout}>
-					<img
-						css={styles.avatar}
-						src="/media/avatar.svg"
-						alt="Quentin Ferreira-Castiço"
-						width={220}
-						height={220}
-					/>
-					<div css={styles.heroContent}>
-						<h1 css={styles.brand}>
-							Bitcrusher <em>Studio</em>
-						</h1>
-						<p css={styles.taglineLarge}>{site.seo.tagline}</p>
+				<Reveal>
+					<div css={styles.heroLayout}>
+						<img
+							css={styles.avatar}
+							src="/media/avatar.svg"
+							alt="Quentin Ferreira-Castiço"
+							width={220}
+							height={220}
+						/>
+						<div css={styles.heroContent}>
+							<h1 css={styles.brand}>
+								Bitcrusher <em>Studio</em>
+							</h1>
+							<p css={styles.taglineLarge}>{site.seo.tagline}</p>
+						</div>
 					</div>
-				</div>
-				<div css={styles.aboutBody}>{about.body}</div>
+				</Reveal>
+				<Reveal delay={1}>
+					<div css={styles.aboutBody}>{about.body}</div>
+				</Reveal>
 			</section>
 
 			<section css={styles.section} id="works" aria-labelledby="works-heading">
@@ -221,13 +226,17 @@ export const LocalePage = ({
 									id={`project-${p.slug}`}
 									css={styles.projectArticle}
 								>
-									<div css={styles.projectChannel}>{channelLabel(p)}</div>
-									<h3 css={styles.projectTitle}>
-										{head ? `${head} ` : ""}
-										<em>{tail}</em>
-									</h3>
-									<div css={styles.projectMeta}>{metaLabel(p)}</div>
-									<div css={styles.projectBody}>{p.body}</div>
+									<Reveal>
+										<div css={styles.projectChannel}>{channelLabel(p)}</div>
+										<h3 css={styles.projectTitle}>
+											{head ? `${head} ` : ""}
+											<em>{tail}</em>
+										</h3>
+									</Reveal>
+									<Reveal delay={1}>
+										<div css={styles.projectMeta}>{metaLabel(p)}</div>
+										<div css={styles.projectBody}>{p.body}</div>
+									</Reveal>
 									{(() => {
 										const VIDEO_EXT = /\.(mp4|webm|mov)$/i;
 										const mediaItems: CarouselItem[] = (p.images ?? []).map(
