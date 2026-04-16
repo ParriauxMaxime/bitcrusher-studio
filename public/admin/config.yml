@@ -5,6 +5,7 @@ backend:
   base_url: https://bitcrusher-oauth.maxime-parriaux-25.workers.dev
   auth_endpoint: auth
 
+site_url: https://parriauxmaxime.github.io/bitcrusher-studio
 media_folder: public/media
 public_folder: /media
 
