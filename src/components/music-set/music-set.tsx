@@ -44,10 +44,11 @@ const styles = {
 	`,
 	trackIcon: css`
 		color: ${tokens.accent};
-		font-size: 14px;
+		font-size: 16px;
 		flex-shrink: 0;
 		width: 18px;
 		text-align: center;
+		line-height: 1;
 	`,
 	trackTitle: css`
 		font-size: 12px;
