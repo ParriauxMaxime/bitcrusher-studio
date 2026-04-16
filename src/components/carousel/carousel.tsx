@@ -37,6 +37,17 @@ const styles = {
 	slide: css`
 		flex: 0 0 100%;
 		min-width: 0;
+		position: relative;
+		overflow: hidden;
+		background: #000;
+	`,
+	blurBg: css`
+		position: absolute;
+		inset: -20px;
+		background-size: cover;
+		background-position: center;
+		filter: blur(20px) brightness(0.4);
+		z-index: 0;
 	`,
 	image: css`
 		object-fit: contain;
@@ -44,6 +55,8 @@ const styles = {
 		max-height: 400px;
 		width: 100%;
 		display: block;
+		position: relative;
+		z-index: 1;
 	`,
 	iframeWrapper: css`
 		position: relative;
@@ -171,28 +184,42 @@ export const Carousel = ({ items }: CarouselProps) => {
 						css={styles.slide}
 					>
 						{item.kind === "image" ? (
-							<img
-								css={styles.image}
-								src={item.src}
-								alt={item.alt}
-								loading="lazy"
-							/>
+							<>
+								<div
+									css={styles.blurBg}
+									style={{ backgroundImage: `url(${item.src})` }}
+								/>
+								<img
+									css={styles.image}
+									src={item.src}
+									alt={item.alt}
+									loading="lazy"
+								/>
+							</>
 						) : item.kind === "video" ? (
-							// biome-ignore lint/a11y/useMediaCaption: captions not required for user-supplied local video slides
-							<video
-								src={item.src}
-								title={item.title}
-								poster={item.poster}
-								controls
-								preload="metadata"
-								css={styles.image}
-								style={{
-									width: "100%",
-									maxHeight: "400px",
-									objectFit: "contain",
-									background: "#000",
-								}}
-							/>
+							<>
+								{item.poster && (
+									<div
+										css={styles.blurBg}
+										style={{ backgroundImage: `url(${item.poster})` }}
+									/>
+								)}
+								{/* biome-ignore lint/a11y/useMediaCaption: captions not required for user-supplied local video slides */}
+								<video
+									src={item.src}
+									title={item.title}
+									poster={item.poster}
+									controls
+									preload="metadata"
+									css={styles.image}
+									style={{
+										width: "100%",
+										maxHeight: "400px",
+										objectFit: "contain",
+										background: "#000",
+									}}
+								/>
+							</>
 						) : (
 							<div css={styles.iframeWrapper}>
 								<iframe
