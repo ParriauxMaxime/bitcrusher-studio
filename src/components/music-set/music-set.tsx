@@ -157,7 +157,7 @@ const fmt = (s: number) => {
 	return `${m}:${sec.toString().padStart(2, "0")}`;
 };
 
-const VU_DOTS = 10;
+const VU_DOTS = 9;
 const VU_DOT_COLORS = [
 	tokens.led.c,
 	tokens.led.c,
@@ -166,7 +166,6 @@ const VU_DOT_COLORS = [
 	tokens.led.a,
 	tokens.led.a,
 	tokens.led.a,
-	tokens.led.b,
 	tokens.led.b,
 	tokens.led.b,
 ];
