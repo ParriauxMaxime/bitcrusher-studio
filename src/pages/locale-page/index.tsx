@@ -221,18 +221,33 @@ export const LocalePage = ({
 									</h3>
 									<div css={styles.projectMeta}>{metaLabel(p)}</div>
 									<div css={styles.projectBody}>{p.body}</div>
-									{(p.images?.length ?? 0) > 0 && (
-										<Carousel
-											items={p.images.map(
-												(src): CarouselItem => ({
-													kind: "image" as const,
-													src,
-													alt: p.title,
+									{(() => {
+										const imageItems: CarouselItem[] = (p.images ?? []).map(
+											(src): CarouselItem => ({
+												kind: "image" as const,
+												src,
+												alt: p.title,
+											}),
+										);
+										const videoItems: CarouselItem[] = p.audio
+											.filter((a) => a.kind === "youtube")
+											.map(
+												(a): CarouselItem => ({
+													kind: "youtube" as const,
+													url: a.url,
+													title: a.title,
 												}),
-											)}
+											);
+										const carouselItems = [...imageItems, ...videoItems];
+										return carouselItems.length > 0 ? (
+											<Carousel items={carouselItems} />
+										) : null;
+									})()}
+									{p.audio.filter((a) => a.kind !== "youtube").length > 0 && (
+										<AudioPlayer
+											sources={p.audio.filter((a) => a.kind !== "youtube")}
 										/>
 									)}
-									{p.audio.length > 0 && <AudioPlayer sources={p.audio} />}
 									{p.links.length > 0 && (
 										<div css={styles.linkList}>
 											{p.links.map((l) => (

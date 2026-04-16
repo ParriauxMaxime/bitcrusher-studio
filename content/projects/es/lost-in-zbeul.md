@@ -7,7 +7,10 @@ year: 2021
 roles: [sound_design, music_composition]
 tags: [tráiler, rogue-lite, multijugador]
 cover: /media/projects/lost-in-zbeul/cover.jpg
-audio: []
+audio:
+  - kind: youtube
+    url: https://www.youtube.com/watch?v=OEuH91irSq4
+    title: Lost In Zbeul — Tráiler Game Cup 2021
 links: []
 collaborators: []
 ---
