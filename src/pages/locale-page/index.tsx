@@ -40,6 +40,9 @@ const styles = {
 		height: auto;
 		border-radius: 50%;
 		border: 1px solid ${tokens.surface.border};
+		@media (max-width: 640px) {
+			width: 180px;
+		}
 	`,
 	heroContent: css`
 		flex: 1 1 180px;
