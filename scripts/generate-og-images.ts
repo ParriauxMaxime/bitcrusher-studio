@@ -28,7 +28,10 @@ const vuLed = (
 	id: string,
 ): string =>
 	lit
-		? `<defs><radialGradient id="${id}"><stop offset="0%" stop-color="${color}"/><stop offset="60%" stop-color="${color}" stop-opacity="0.6"/><stop offset="100%" stop-color="${color}" stop-opacity="0"/></radialGradient></defs><circle cx="${x}" cy="${y}" r="16" fill="url(#${id})"/><circle cx="${x}" cy="${y}" r="6" fill="${color}"/>`
+		? (() => {
+				const halo = color === "#ff5a4a" ? 14 : color === "#e8b62a" ? 12 : 10;
+				return `<defs><radialGradient id="${id}"><stop offset="0%" stop-color="${color}"/><stop offset="50%" stop-color="${color}" stop-opacity="0.4"/><stop offset="100%" stop-color="${color}" stop-opacity="0"/></radialGradient></defs><circle cx="${x}" cy="${y}" r="${halo}" fill="url(#${id})"/><circle cx="${x}" cy="${y}" r="6" fill="${color}"/>`;
+			})()
 		: `<circle cx="${x}" cy="${y}" r="8" fill="#2a3a4a"/>`;
 
 const vuColumn = (x: number, level: number): string => {
