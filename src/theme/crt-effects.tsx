@@ -14,7 +14,9 @@ const readCrt = (): number => {
 const subscribers = new Set<() => void>();
 const subscribeCrt = (fn: () => void) => {
 	subscribers.add(fn);
-	return () => subscribers.delete(fn);
+	return () => {
+		subscribers.delete(fn);
+	};
 };
 const notifyCrt = () => {
 	for (const fn of subscribers) fn();
