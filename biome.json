@@ -29,6 +29,7 @@
 			"!_wayback",
 			"!src/content/generated.ts",
 			"!public/media/.peaks-cache.json",
+			"!public/media/**/*.peaks.json",
 			"!public/og/.cache.json"
 		]
 	},

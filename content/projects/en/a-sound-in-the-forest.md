@@ -8,11 +8,11 @@ roles: [music_composition]
 tags: [mobile, puzzle, dreamlike]
 cover: /media/projects/a-sound-in-the-forest/cover.jpg
 audio:
-  - kind: soundcloud
-    url: https://soundcloud.com/user-836588138/a-sound-in-the-forest-theme-n1
+  - kind: file
+    src: /media/projects/a-sound-in-the-forest/theme-n1.mp3
     title: Theme N°1
-  - kind: soundcloud
-    url: https://soundcloud.com/user-836588138/a-sound-in-the-forest-in-game-exemple
+  - kind: file
+    src: /media/projects/a-sound-in-the-forest/in-game-exemple.mp3
     title: In Game (Example)
 links:
   - label: Concept art — Viktor Tounissoux

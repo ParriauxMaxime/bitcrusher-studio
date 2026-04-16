@@ -8,14 +8,14 @@ roles: [music_composition, sound_design, integration]
 tags: [game, steam]
 cover: /media/projects/dawn-of-light/cover.jpg
 audio:
-  - kind: soundcloud
-    url: https://soundcloud.com/user-836588138/dawn-of-light-main-menu-theme-one-shot
+  - kind: file
+    src: /media/projects/dawn-of-light/main-menu-theme.mp3
     title: Main Menu Theme (One Shot)
-  - kind: soundcloud
-    url: https://soundcloud.com/user-836588138/dawn-of-light-credits-music
+  - kind: file
+    src: /media/projects/dawn-of-light/credits-music.mp3
     title: Credits Music
-  - kind: soundcloud
-    url: https://soundcloud.com/user-836588138/dawn-of-light-menu-theme-extended-prototype
+  - kind: file
+    src: /media/projects/dawn-of-light/menu-theme-extended.mp3
     title: Menu Theme (Extended Prototype)
 links:
   - label: Steam
