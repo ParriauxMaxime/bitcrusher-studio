@@ -15,6 +15,9 @@ footer:
     - kind: linkedin
       url: https://www.linkedin.com/in/quentin-ferreira-castiço
       label: LinkedIn
+    - kind: malt
+      url: https://www.malt.fr/profile/quentinferreiracastico
+      label: Malt
 seo:
   site_name: Bitcrusher Studio
   tagline: Musique & Sound Design pour Post Production Audiovisuelle et Jeux Vidéo

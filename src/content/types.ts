@@ -95,7 +95,7 @@ export const SiteCopySchema = z.object({
 		socials: z
 			.array(
 				z.object({
-					kind: z.enum(["soundcloud", "youtube", "linkedin"]),
+					kind: z.enum(["soundcloud", "youtube", "linkedin", "malt"]),
 					url: z.string().url(),
 					label: z.string(),
 				}),
