@@ -22,7 +22,7 @@ const xmlEscape = (s: string): string =>
 
 const vuLed = (x: number, y: number, color: string, lit: boolean): string =>
 	lit
-		? `<circle cx="${x}" cy="${y}" r="8" fill="${color}" opacity="0.9"/><circle cx="${x}" cy="${y}" r="12" fill="${color}" opacity="0.2"/>`
+		? `<circle cx="${x}" cy="${y}" r="16" fill="${color}" opacity="0.1"/><circle cx="${x}" cy="${y}" r="11" fill="${color}" opacity="0.15"/><circle cx="${x}" cy="${y}" r="8" fill="${color}" opacity="0.9"/>`
 		: `<circle cx="${x}" cy="${y}" r="8" fill="#2a3a4a"/>`;
 
 const vuColumn = (x: number, level: number): string => {
@@ -76,14 +76,19 @@ const template = (title: string, subtitle: string): string => `
   </radialGradient>
   <rect width="1200" height="630" fill="url(#vig)"/>
 
-  <!-- Text glow (blurred duplicate behind) -->
-  <filter id="glow">
-    <feGaussianBlur stdDeviation="6" result="blur"/>
-    <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+  <!-- Text glow filter (soft diffuse) -->
+  <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+    <feGaussianBlur in="SourceGraphic" stdDeviation="12" result="b1"/>
+    <feGaussianBlur in="SourceGraphic" stdDeviation="25" result="b2"/>
+    <feMerge>
+      <feMergeNode in="b2"/>
+      <feMergeNode in="b1"/>
+      <feMergeNode in="SourceGraphic"/>
+    </feMerge>
   </filter>
 
-  <!-- Brand (hero style, bigger) -->
-  <text x="80" y="300" font-family="Instrument Serif, Georgia, serif" font-style="italic" font-size="160" font-weight="400" fill="#66c0f4" opacity="0.3" filter="url(#glow)">Bitcrusher Studio</text>
+  <!-- Brand glow (diffuse, multi-layer) -->
+  <text x="80" y="300" font-family="Instrument Serif, Georgia, serif" font-style="italic" font-size="160" font-weight="400" fill="#66c0f4" opacity="0.2" filter="url(#glow)">Bitcrusher Studio</text>
   <text x="80" y="300" font-family="Instrument Serif, Georgia, serif" font-style="italic" font-size="160" font-weight="400" fill="#e5e5e5">Bitcrusher <tspan fill="#66c0f4">Studio</tspan></text>
 
   <!-- Chromatic aberration on brand -->
