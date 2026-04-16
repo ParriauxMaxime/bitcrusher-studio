@@ -21,6 +21,7 @@ export const RootSplash = () => (
 		/>
 		<meta property="og:image" content={ogImage} />
 		<meta property="og:type" content="website" />
+		<meta property="og:url" content={siteOrigin} />
 		<meta name="twitter:card" content="summary_large_image" />
 		<noscript>
 			<div
