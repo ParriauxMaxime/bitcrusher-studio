@@ -72,7 +72,6 @@ collections:
     format: frontmatter
     create: true
     fields:
-      - { name: slug, widget: string, i18n: duplicate }
       - { name: title, widget: string, i18n: true }
       - { name: order, widget: number, i18n: duplicate }
       - { name: featured, widget: boolean, default: false, i18n: duplicate }
