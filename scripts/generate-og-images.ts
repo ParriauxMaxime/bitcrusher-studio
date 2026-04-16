@@ -22,7 +22,7 @@ const xmlEscape = (s: string): string =>
 
 const vuLed = (x: number, y: number, color: string, lit: boolean): string =>
 	lit
-		? `<circle cx="${x}" cy="${y}" r="8" fill="${color}" opacity="0.9" filter="url(#glow)"/>`
+		? `<circle cx="${x}" cy="${y}" r="14" fill="${color}" opacity="0.08"/><circle cx="${x}" cy="${y}" r="8" fill="${color}" opacity="0.9"/>`
 		: `<circle cx="${x}" cy="${y}" r="8" fill="#2a3a4a"/>`;
 
 const vuColumn = (x: number, level: number): string => {
