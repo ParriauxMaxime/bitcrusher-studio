@@ -101,5 +101,19 @@ export const SiteCopySchema = z.object({
 		site_name: z.string(),
 		tagline: z.string(),
 	}),
+	theme: z
+		.object({
+			default: z.string().default("vapor"),
+			crt: z
+				.object({
+					scanlines: z.number().default(42),
+					glow: z.number().default(37),
+					aberration: z.number().default(53),
+					vignette: z.number().default(65),
+					flicker: z.number().default(0),
+				})
+				.default({}),
+		})
+		.default({}),
 });
 export type SiteCopy = z.infer<typeof SiteCopySchema>;

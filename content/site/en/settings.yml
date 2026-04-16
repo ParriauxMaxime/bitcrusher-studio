@@ -1,6 +1,6 @@
 footer:
   email: contact@bitcrusher-studio.com
-  copyright: © 2026 Bitcrusher Studio · Tous droits réservés
+  copyright: © 2026 Bitcrusher Studio · All rights reserved
   socials:
     - kind: soundcloud
       url: https://soundcloud.com/user-836588138
@@ -16,4 +16,12 @@ footer:
       label: Malt
 seo:
   site_name: Bitcrusher Studio
-  tagline: Musique & Sound Design pour Post Production Audiovisuelle et Jeux Vidéo
+  tagline: Music & Sound Design for Audiovisual Post-Production and Video Games
+theme:
+  default: vapor
+  crt:
+    scanlines: 42
+    glow: 37
+    aberration: 53
+    vignette: 65
+    flicker: 0

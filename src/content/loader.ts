@@ -85,7 +85,7 @@ const loadProjects = async (
 
 const loadSite = async (locale: LocaleEnum): Promise<SiteCopy> => {
 	const raw = await readFile(
-		join(CONTENT_ROOT, "site", `${locale}.yml`),
+		join(CONTENT_ROOT, "site", locale, "settings.yml"),
 		"utf8",
 	);
 	const data = parseYaml(raw);

@@ -16,36 +16,37 @@ i18n:
 
 collections:
   - name: site
-    label: Site copy
-    files:
-      - name: fr
-        label: Français
-        file: content/site/fr.yml
-        format: yaml
-        fields: &site_fields
-          - { name: footer, widget: object, fields: [
-              { name: email, widget: string },
-              { name: copyright, widget: string },
-              { name: socials, widget: list, fields: [
-                  { name: kind, widget: select, options: [soundcloud, youtube, linkedin, malt] },
-                  { name: url, widget: string },
-                  { name: label, widget: string }
-                ]}
+    label: Settings
+    i18n: true
+    folder: content/site
+    path: "{{slug}}"
+    extension: yml
+    format: yaml
+    create: false
+    fields:
+      - { name: footer, widget: object, i18n: true, fields: [
+          { name: email, widget: string, i18n: duplicate },
+          { name: copyright, widget: string, i18n: true },
+          { name: socials, widget: list, i18n: duplicate, fields: [
+              { name: kind, widget: select, options: [soundcloud, youtube, linkedin, malt] },
+              { name: url, widget: string },
+              { name: label, widget: string }
             ]}
-          - { name: seo, widget: object, fields: [
-              { name: site_name, widget: string },
-              { name: tagline, widget: string }
+        ]}
+      - { name: seo, widget: object, i18n: true, fields: [
+          { name: site_name, widget: string, i18n: duplicate },
+          { name: tagline, widget: string, i18n: true }
+        ]}
+      - { name: theme, widget: object, i18n: duplicate, fields: [
+          { name: default, widget: select, options: [graphite, mahogany, synthwave, vapor] },
+          { name: crt, widget: object, fields: [
+              { name: scanlines, widget: number, value_type: int, min: 0, max: 100 },
+              { name: glow, widget: number, value_type: int, min: 0, max: 100 },
+              { name: aberration, widget: number, value_type: int, min: 0, max: 100 },
+              { name: vignette, widget: number, value_type: int, min: 0, max: 100 },
+              { name: flicker, widget: number, value_type: int, min: 0, max: 100 }
             ]}
-      - name: en
-        label: English
-        file: content/site/en.yml
-        format: yaml
-        fields: *site_fields
-      - name: es
-        label: Español
-        file: content/site/es.yml
-        format: yaml
-        fields: *site_fields
+        ]}
 
   - name: pages
     label: Pages

@@ -17,3 +17,11 @@ footer:
 seo:
   site_name: Bitcrusher Studio
   tagline: Música y Diseño de Sonido para Postproducción Audiovisual y Videojuegos
+theme:
+  default: vapor
+  crt:
+    scanlines: 42
+    glow: 37
+    aberration: 53
+    vignette: 65
+    flicker: 0
