@@ -149,13 +149,6 @@ const styles = {
 		flex-direction: column;
 		gap: 12px;
 	`,
-	vuContainer: css`
-		display: flex;
-		flex-direction: column-reverse;
-		gap: 2px;
-		height: 60px;
-		justify-content: flex-start;
-	`,
 };
 
 const fmt = (s: number) => {
@@ -164,33 +157,43 @@ const fmt = (s: number) => {
 	return `${m}:${sec.toString().padStart(2, "0")}`;
 };
 
-const VU_SEGMENTS = 8;
-const VU_COLORS = [
+const VU_DOTS = 10;
+const VU_DOT_COLORS = [
+	tokens.led.c,
 	tokens.led.c,
 	tokens.led.c,
 	tokens.led.c,
 	tokens.led.a,
 	tokens.led.a,
 	tokens.led.a,
+	tokens.led.b,
 	tokens.led.b,
 	tokens.led.b,
 ];
 
-const VuMeter = ({ level }: { level: number }) => {
-	const litCount = Math.round(level * VU_SEGMENTS);
+const VuColumn = ({ level }: { level: number }) => {
+	const litCount = Math.round(level * VU_DOTS);
 	return (
-		<div css={styles.vuContainer}>
-			{Array.from({ length: VU_SEGMENTS }, (_, i) => {
+		<div
+			css={css`
+				display: flex;
+				flex-direction: column-reverse;
+				gap: 3px;
+			`}
+		>
+			{Array.from({ length: VU_DOTS }, (_, i) => {
 				const lit = i < litCount;
+				const color = VU_DOT_COLORS[i] ?? tokens.led.off;
 				return (
 					<div
 						key={i}
 						css={css`
-							width: 10px;
-							height: 5px;
-							border-radius: 1px;
-							background: ${lit ? VU_COLORS[i] : tokens.led.off};
-							box-shadow: ${lit ? `0 0 5px ${VU_COLORS[i]}` : "none"};
+							width: 6px;
+							height: 6px;
+							border-radius: 50%;
+							background: ${lit ? color : tokens.led.off};
+							box-shadow: ${lit ? `0 0 6px ${color}` : "none"};
+							transition: background 0.05s, box-shadow 0.05s;
 						`}
 					/>
 				);
@@ -198,6 +201,20 @@ const VuMeter = ({ level }: { level: number }) => {
 		</div>
 	);
 };
+
+const VuMeter = ({ levels }: { levels: [number, number] }) => (
+	<div
+		css={css`
+			display: flex;
+			gap: 4px;
+			align-items: flex-end;
+			padding: 8px 4px;
+		`}
+	>
+		<VuColumn level={levels[0]} />
+		<VuColumn level={levels[1]} />
+	</div>
+);
 
 interface Peaks {
 	peaks: number[];
@@ -222,7 +239,7 @@ export const MusicSet = ({ sources }: MusicSetProps) => {
 			return 0.8;
 		}
 	});
-	const [vuLevel, setVuLevel] = useState(0);
+	const [vuLevels, setVuLevels] = useState<[number, number]>([0, 0]);
 
 	const audioRef = useRef<HTMLAudioElement>(null);
 	const ctxRef = useRef<AudioContext | null>(null);
@@ -290,13 +307,13 @@ export const MusicSet = ({ sources }: MusicSetProps) => {
 		if (!analyserRef.current) return;
 		const data = new Uint8Array(analyserRef.current.frequencyBinCount);
 		analyserRef.current.getByteFrequencyData(data);
-		let sum = 0;
-		const count = Math.min(32, data.length);
-		for (let i = 0; i < count; i++) {
-			sum += (data[i] ?? 0) * (data[i] ?? 0);
-		}
-		const rms = Math.sqrt(sum / count) / 255;
-		setVuLevel(rms);
+		let sumL = 0;
+		let sumR = 0;
+		for (let i = 0; i < 16; i++) sumL += (data[i] ?? 0) ** 2;
+		for (let i = 16; i < 32; i++) sumR += (data[i] ?? 0) ** 2;
+		const left = Math.sqrt(sumL / 16) / 255;
+		const right = Math.sqrt(sumR / 16) / 255;
+		setVuLevels([left, right]);
 		rafRef.current = requestAnimationFrame(updateVu);
 	}, []);
 
@@ -308,7 +325,7 @@ export const MusicSet = ({ sources }: MusicSetProps) => {
 			rafRef.current = requestAnimationFrame(updateVu);
 		} else {
 			cancelAnimationFrame(rafRef.current);
-			setVuLevel(0);
+			setVuLevels([0, 0]);
 		}
 		return () => cancelAnimationFrame(rafRef.current);
 	}, [state.playing, ensureAnalyser, updateVu]);
@@ -430,7 +447,7 @@ export const MusicSet = ({ sources }: MusicSetProps) => {
 							</div>
 						</div>
 					</div>
-					<VuMeter level={vuLevel} />
+					<VuMeter levels={vuLevels} />
 				</div>
 			</div>
 
