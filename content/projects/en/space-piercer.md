@@ -9,6 +9,7 @@ tags: [shooter, sf, collaboration, free-to-play]
 cover: /media/projects/space-piercer/cover.jpg
 images:
   - /media/projects/space-piercer/screenshot-01.jpg
+  - /media/projects/space-piercer/screenshot-02.jpg
 audio: []
 links:
   - label: Steam
