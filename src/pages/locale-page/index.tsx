@@ -54,17 +54,17 @@ const styles = {
 	brand: css`
 		font-family: "Instrument Serif", Georgia, serif;
 		font-style: italic;
-		font-size: clamp(56px, 10vw, 120px);
+		font-size: clamp(36px, 5vw, 72px);
 		color: ${tokens.text.heading};
-		line-height: 0.95;
+		line-height: 1;
 		letter-spacing: -0.03em;
-		margin: 0 0 8px;
+		margin: 0;
+		white-space: nowrap;
 	`,
 	taglineLarge: css`
-		color: ${tokens.text.body};
-		font-size: clamp(18px, 1.9vw, 24px);
+		color: ${tokens.text.heading};
+		font-size: clamp(16px, 1.6vw, 22px);
 		line-height: 1.45;
-		max-width: 560px;
 		margin: 0;
 	`,
 	section: css`
