@@ -118,8 +118,8 @@ export const Carousel = ({ items }: CarouselProps) => {
 	const [index, setIndex] = useState(0);
 	const single = items.length <= 1;
 
-	const prev = () => setIndex((i) => Math.max(0, i - 1));
-	const next = () => setIndex((i) => Math.min(items.length - 1, i + 1));
+	const prev = () => setIndex((i) => (i - 1 + items.length) % items.length);
+	const next = () => setIndex((i) => (i + 1) % items.length);
 
 	const handleKeyDown = (e: React.KeyboardEvent) => {
 		if (e.key === "ArrowLeft") {
