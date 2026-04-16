@@ -102,15 +102,16 @@ const styles = {
 	`,
 	projectChannel: css`
 		font-family: "JetBrains Mono", ui-monospace, monospace;
-		font-size: 10px;
-		letter-spacing: 0.25em;
+		font-size: 9px;
+		letter-spacing: 0.3em;
 		text-transform: uppercase;
 		color: ${tokens.text.muted};
+		margin-bottom: 12px;
 	`,
 	projectTitle: css`
 		font-family: "Instrument Serif", Georgia, serif;
 		font-style: italic;
-		font-size: clamp(32px, 5vw, 56px);
+		font-size: clamp(36px, 6vw, 64px);
 		color: ${tokens.text.heading};
 		letter-spacing: -0.02em;
 		line-height: 1.05;
