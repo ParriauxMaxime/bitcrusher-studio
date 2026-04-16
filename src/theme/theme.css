@@ -69,25 +69,30 @@ body {
 * {
 	box-sizing: border-box;
 	scrollbar-width: thin;
-	scrollbar-color: var(--accent) transparent;
+	scrollbar-color: var(--knob-hi) var(--knob-lo);
 }
 
 ::-webkit-scrollbar {
-	width: 6px;
-	height: 6px;
+	width: 8px;
+	height: 8px;
 }
 
 ::-webkit-scrollbar-track {
-	background: transparent;
+	background: var(--knob-lo);
 }
 
 ::-webkit-scrollbar-thumb {
-	background: var(--accent);
-	border-radius: 3px;
+	background: var(--knob-hi);
+	border-radius: 4px;
+	border: 2px solid var(--knob-lo);
 }
 
 ::-webkit-scrollbar-thumb:hover {
-	background: var(--text-body);
+	background: var(--text-muted);
+}
+
+::-webkit-scrollbar-corner {
+	background: var(--knob-lo);
 }
 
 html,
