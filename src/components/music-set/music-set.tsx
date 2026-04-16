@@ -29,7 +29,7 @@ const styles = {
 		display: flex;
 		align-items: center;
 		gap: 8px;
-		padding: 7px 12px;
+		padding: 10px 12px;
 		cursor: pointer;
 		border: none;
 		background: ${active ? "rgba(0, 0, 0, 0.3)" : "transparent"};
@@ -68,6 +68,7 @@ const styles = {
 		padding: 12px;
 		display: flex;
 		flex-direction: column;
+		justify-content: space-between;
 		gap: 8px;
 	`,
 	playerTitle: css`
@@ -141,7 +142,7 @@ const styles = {
 	playerRight: css`
 		display: flex;
 		gap: 14px;
-		align-items: flex-start;
+		align-items: center;
 	`,
 	playerMain: css`
 		flex: 1;
