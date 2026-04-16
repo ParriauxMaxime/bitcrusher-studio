@@ -14,8 +14,6 @@ const styles = {
 	`,
 };
 
-const isDev = process.env.NODE_ENV !== "production";
-
 export interface LayoutProps {
 	site: SiteCopy;
 	children: ReactNode;
@@ -36,6 +34,6 @@ export const Layout = ({ site, children }: LayoutProps) => (
 				url: s.url,
 			}))}
 		/>
-		{isDev && <ThemeSwitcherDev />}
+		<ThemeSwitcherDev />
 	</>
 );
