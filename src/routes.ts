@@ -1,5 +1,11 @@
 import { ALL_LOCALES, type LocaleEnum } from "@/content/types";
 
+export const BASE_PATH =
+	typeof window !== "undefined" &&
+	window.location.pathname.startsWith("/bitcrusher-studio")
+		? "/bitcrusher-studio"
+		: "";
+
 export const RouteKindEnum = {
 	root_splash: "root_splash",
 	home: "home",

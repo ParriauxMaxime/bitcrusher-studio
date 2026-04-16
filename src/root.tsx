@@ -17,7 +17,7 @@ import { Layout } from "@/pages/layout";
 import { LocalePage } from "@/pages/locale-page";
 import { NotFound } from "@/pages/not-found";
 import { RootSplash } from "@/pages/root-splash";
-import { ROUTES, RouteKindEnum } from "@/routes";
+import { BASE_PATH, ROUTES, RouteKindEnum } from "@/routes";
 
 const ORIGIN =
 	typeof window !== "undefined" && window.location.origin
@@ -25,7 +25,10 @@ const ORIGIN =
 		: "https://bitcrusher-studio.com";
 
 const resolveRoute = () => {
-	const path = window.location.pathname.replace(/\/$/, "") || "/";
+	let path = window.location.pathname.replace(/\/$/, "") || "/";
+	if (BASE_PATH && path.startsWith(BASE_PATH)) {
+		path = path.slice(BASE_PATH.length) || "/";
+	}
 	const matched = ROUTES.find((r) => r.path === path);
 	if (matched) return matched;
 	for (const locale of ALL_LOCALES) {
@@ -49,7 +52,7 @@ export const Root = () => {
 			: lang.startsWith("es")
 				? "es"
 				: "fr";
-		window.history.replaceState(null, "", `/${pick}/`);
+		window.history.replaceState(null, "", `${BASE_PATH}/${pick}/`);
 		setRoute({ path: `/${pick}`, kind: RouteKindEnum.home, locale: pick });
 	}, [route.kind]);
 
@@ -62,7 +65,7 @@ export const Root = () => {
 	}, [route.locale]);
 
 	const changeLocale = (next: LocaleEnum) => {
-		window.history.replaceState(null, "", `/${next}/`);
+		window.history.replaceState(null, "", `${BASE_PATH}/${next}/`);
 		document.documentElement.lang = next;
 		void i18next.changeLanguage(next);
 		setRoute({ path: `/${next}`, kind: RouteKindEnum.home, locale: next });
