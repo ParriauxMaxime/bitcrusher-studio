@@ -60,6 +60,11 @@ const styles = {
 		letter-spacing: -0.03em;
 		margin: 0;
 		white-space: nowrap;
+		em {
+			color: ${tokens.accent};
+			font-style: italic;
+			font-weight: 400;
+		}
 	`,
 	taglineLarge: css`
 		color: ${tokens.text.heading};
