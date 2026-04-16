@@ -7,6 +7,9 @@ year: 2021
 roles: [music_composition, sound_design, integration]
 tags: [game, steam]
 cover: /media/projects/dawn-of-light/cover.jpg
+images:
+  - /media/projects/dawn-of-light/trailer.mp4
+  - /media/projects/dawn-of-light/screenshot-01.jpg
 audio:
   - kind: file
     src: /media/projects/dawn-of-light/main-menu-theme.mp3

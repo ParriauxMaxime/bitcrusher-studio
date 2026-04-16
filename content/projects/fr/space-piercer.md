@@ -8,6 +8,7 @@ roles: [sound_design]
 tags: [shooter, sf, collaboration, free-to-play]
 cover: /media/projects/space-piercer/cover.jpg
 images:
+  - /media/projects/space-piercer/trailer.mp4
   - /media/projects/space-piercer/screenshot-01.jpg
   - /media/projects/space-piercer/screenshot-02.jpg
 audio: []

@@ -229,12 +229,12 @@ export const LocalePage = ({
 									<div css={styles.projectMeta}>{metaLabel(p)}</div>
 									<div css={styles.projectBody}>{p.body}</div>
 									{(() => {
-										const imageItems: CarouselItem[] = (p.images ?? []).map(
-											(src): CarouselItem => ({
-												kind: "image" as const,
-												src,
-												alt: p.title,
-											}),
+										const VIDEO_EXT = /\.(mp4|webm|mov)$/i;
+										const mediaItems: CarouselItem[] = (p.images ?? []).map(
+											(src): CarouselItem =>
+												VIDEO_EXT.test(src)
+													? { kind: "video" as const, src, title: p.title }
+													: { kind: "image" as const, src, alt: p.title },
 										);
 										const videoItems: CarouselItem[] = p.audio
 											.filter((a) => a.kind === "youtube")
@@ -245,7 +245,7 @@ export const LocalePage = ({
 													title: a.title,
 												}),
 											);
-										const carouselItems = [...imageItems, ...videoItems];
+										const carouselItems = [...mediaItems, ...videoItems];
 										return carouselItems.length > 0 ? (
 											<Carousel items={carouselItems} />
 										) : null;
