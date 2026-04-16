@@ -176,15 +176,21 @@ export const CrtEffects = () => {
 					fl > 0
 						? `@keyframes crt-flicker {
 					0%, 100% { opacity: 1; }
-					3% { opacity: ${1 - 0.03 * fl}; }
+					3% { opacity: ${1 - 0.15 * fl}; }
 					6% { opacity: 1; }
 					48% { opacity: 1; }
-					50% { opacity: ${1 - 0.05 * fl}; }
+					50% { opacity: ${1 - 0.2 * fl}; }
 					52% { opacity: 1; }
 					97% { opacity: 1; }
-					98% { opacity: ${1 - 0.02 * fl}; }
+					98% { opacity: ${1 - 0.1 * fl}; }
 				}
-				body {
+				body::after {
+					content: "";
+					position: fixed;
+					inset: 0;
+					pointer-events: none;
+					z-index: 9000;
+					background: rgba(0, 0, 0, 0.03);
 					animation: crt-flicker ${2 + (1 - fl) * 3}s infinite;
 				}`
 						: ""

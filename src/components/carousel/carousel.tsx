@@ -24,6 +24,7 @@ const styles = {
 		overflow: hidden;
 		border-radius: 6px;
 		border: 1px solid ${tokens.surface.border};
+		z-index: 9001;
 		&:hover .carousel-arrow {
 			opacity: 1;
 		}

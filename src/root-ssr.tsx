@@ -53,7 +53,7 @@ export const RootSSR = ({ routePath }: RootSSRProps) => {
 				const site = content.site[locale];
 				if (!home || !about) return <NotFound locale={locale} />;
 				const projects = Object.values(content.projects[locale]).sort(
-					(a, b) => a.order - b.order,
+					(a, b) => b.year - a.year || a.order - b.order,
 				);
 				const meta = buildMeta({
 					origin: ORIGIN,
