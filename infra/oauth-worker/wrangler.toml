@@ -3,4 +3,4 @@ main = "worker.ts"
 compatibility_date = "2024-11-01"
 
 [vars]
-ALLOWED_ORIGIN = "https://bitcrusher-studio.com"
+ALLOWED_ORIGIN = "https://parriauxmaxime.github.io"
