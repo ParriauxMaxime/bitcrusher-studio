@@ -228,10 +228,7 @@ export const LocalePage = ({
 				</Reveal>
 			</section>
 
-			<section css={styles.section} id="works" aria-labelledby="works-heading">
-				<h2 id="works-heading" css={styles.worksTitle}>
-					{site.nav.works}
-				</h2>
+			<section css={styles.section} id="works">
 				{projects.length === 0 ? (
 					<p>{t("works.empty")}</p>
 				) : (
