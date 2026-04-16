@@ -26,9 +26,9 @@ const vuColumn = (x: number, level: number): string => {
 		"#5ba32b",
 		"#5ba32b",
 		"#5ba32b",
-		"#66c0f4",
-		"#66c0f4",
-		"#66c0f4",
+		"#e8b62a",
+		"#e8b62a",
+		"#e8b62a",
 		"#ff5a4a",
 		"#ff5a4a",
 	];
@@ -47,22 +47,17 @@ const template = (title: string, subtitle: string): string => `
   </defs>
   <rect width="1200" height="630" fill="url(#g)"/>
 
-  <!-- Mono label -->
-  <text x="80" y="140" font-family="monospace" font-size="20" fill="#66c0f4" letter-spacing="6">BITCRUSHER STUDIO</text>
+  <!-- Brand (hero style) -->
+  <text x="80" y="260" font-family="Georgia, serif" font-style="italic" font-size="120" font-weight="400" fill="#e5e5e5">Bitcrusher</text>
+  <text x="700" y="260" font-family="Georgia, serif" font-style="italic" font-size="120" font-weight="400" fill="#66c0f4">Studio</text>
 
-  <!-- Title -->
-  <text x="80" y="300" font-family="Georgia, serif" font-style="italic" font-size="86" fill="#e5e5e5">${xmlEscape(title.slice(0, 30))}</text>
-  <text x="80" y="390" font-family="sans-serif" font-size="28" fill="#acb2b8">${xmlEscape(subtitle.slice(0, 70))}</text>
-
-  <!-- Accent line -->
-  <rect x="80" y="440" width="500" height="2" fill="#66c0f4" opacity="0.4"/>
+  <!-- Tagline -->
+  <text x="80" y="340" font-family="sans-serif" font-size="30" fill="#acb2b8">${xmlEscape(subtitle.slice(0, 70))}</text>
 
   <!-- VU meter decoration (right side) -->
   <g>
-    ${vuColumn(1060, 6)}
-    ${vuColumn(1090, 4)}
-    ${vuColumn(1120, 7)}
-    ${vuColumn(1150, 5)}
+    ${vuColumn(1090, 7)}
+    ${vuColumn(1130, 8)}
   </g>
 </svg>
 `;
