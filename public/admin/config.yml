@@ -65,7 +65,7 @@ collections:
 
   - name: projects
     label: Projects
-    folder: content/projects/fr
+    folder: content/works
     extension: md
     format: frontmatter
     create: true
