@@ -8,7 +8,8 @@ const readTheme = (): ThemeEnum => {
 	if (
 		fromDom === ThemeEnum.graphite ||
 		fromDom === ThemeEnum.mahogany ||
-		fromDom === ThemeEnum.synthwave
+		fromDom === ThemeEnum.synthwave ||
+		fromDom === ThemeEnum.vapor
 	) {
 		return fromDom;
 	}

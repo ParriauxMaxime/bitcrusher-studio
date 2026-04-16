@@ -8,18 +8,21 @@ const THEME_LABELS: Record<ThemeEnum, string> = {
 	graphite: "Graphite",
 	mahogany: "Mahogany",
 	synthwave: "Synthwave",
+	vapor: "Vapor",
 };
 
 const THEME_GRADIENTS: Record<ThemeEnum, string> = {
 	graphite: "linear-gradient(145deg, #2e2e33, #18181c)",
 	mahogany: "linear-gradient(145deg, #3a1b18, #1d0d0b)",
 	synthwave: "linear-gradient(145deg, #1a0a2e, #0d0518)",
+	vapor: "linear-gradient(145deg, #1b2838, #171a21)",
 };
 
 const THEME_ACCENTS: Record<ThemeEnum, string> = {
 	graphite: "#f5c44a",
 	mahogany: "#f5c44a",
 	synthwave: "#ff2d7b",
+	vapor: "#66c0f4",
 };
 
 const styles = {

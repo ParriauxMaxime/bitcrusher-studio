@@ -49,6 +49,22 @@
 	--focus-ring: color-mix(in srgb, var(--accent) 80%, transparent);
 }
 
+[data-theme="vapor"] {
+	--surface-base: linear-gradient(145deg, #1b2838 0%, #171a21 100%);
+	--surface-border: rgba(102, 192, 244, 0.12);
+	--text-heading: #e5e5e5;
+	--text-body: #acb2b8;
+	--text-muted: #7a8288;
+	--accent: #66c0f4;
+	--led-a: #66c0f4;
+	--led-b: #ff5a4a;
+	--led-c: #5ba32b;
+	--led-off: #1b2838;
+	--knob-hi: #3a4a58;
+	--knob-lo: #171a21;
+	--focus-ring: color-mix(in srgb, var(--accent) 80%, transparent);
+}
+
 [data-theme="graphite"] body::after {
 	content: "";
 	position: fixed;

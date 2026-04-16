@@ -26,6 +26,7 @@ export const ThemeEnum = {
 	graphite: "graphite",
 	mahogany: "mahogany",
 	synthwave: "synthwave",
+	vapor: "vapor",
 } as const;
 export type ThemeEnum = (typeof ThemeEnum)[keyof typeof ThemeEnum];
 
@@ -33,4 +34,5 @@ export const ALL_THEMES: readonly ThemeEnum[] = [
 	ThemeEnum.graphite,
 	ThemeEnum.mahogany,
 	ThemeEnum.synthwave,
+	ThemeEnum.vapor,
 ];
