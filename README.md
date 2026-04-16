@@ -6,68 +6,40 @@
 
 Portfolio site for [Quentin Ferreira-Castiço](https://www.linkedin.com/in/quentin-ferreira-castiço) — _bitcrusher-studio.com_.
 
-[![TypeScript](https://img.shields.io/badge/TypeScript-strict-3178c6?logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
-[![React](https://img.shields.io/badge/React-19-61dafb?logo=react&logoColor=white)](https://react.dev/)
-[![Rsbuild](https://img.shields.io/badge/Rsbuild-SSG-f92672)](https://rsbuild.dev/)
-[![i18n](https://img.shields.io/badge/i18n-fr%20%C2%B7%20en%20%C2%B7%20es-fd971f)](#)
-
 </div>
 
 ---
 
-## Stack
+## About
 
-| Layer         | Tech                                                            |
-|---------------|-----------------------------------------------------------------|
-| UI            | React 19 + Emotion (`css` prop)                                 |
-| Build         | Rsbuild (rspack) + custom postbuild prerender (jsdom)           |
-| Language      | TypeScript strict, ES2020                                       |
-| Lint / Format | Biome                                                           |
-| i18n          | i18next + react-i18next (fr / en / es)                          |
-| Content       | Markdown + YAML, zod-validated                                  |
-| CMS           | Sveltia (via GitHub OAuth + CF Worker)                          |
-| Audio         | Canvas waveform + HTML5 audio + lazy iframes                    |
-| Deploy        | GitHub Pages via Actions                                        |
-
-## Development
-
-```bash
-npm install
-npm run dev          # parallel: content sync (watch) + rsbuild dev on :3000
-npm run build        # prebuild (content, waveforms, OG) → rsbuild build → postbuild (prerender) → sitemap
-npm run check        # biome lint + format
-npm run check:fix    # auto-fix
-npm run typecheck    # tsc --noEmit
-npm run test         # vitest (includes a11y smoke on dist/)
-```
-
-## Structure
-
-```
-bitcrusher-studio/
-├── content/            # markdown + YAML (edit here or via Sveltia)
-├── public/
-│   ├── admin/          # Sveltia CMS shell
-│   ├── media/          # audio + images (friend-editable)
-│   └── og/             # generated OG images
-├── src/
-│   ├── pages/          # one folder per route component
-│   ├── components/     # shell, audio-player, theme-switcher-dev, head
-│   ├── content/        # zod schemas + loader
-│   ├── theme/          # CSS vars + hooks
-│   ├── i18n/           # resources + bootstrap
-│   └── lib/            # seo, audio core
-├── scripts/            # prebuild, waveforms, OG, sitemap, postbuild
-└── infra/oauth-worker/ # Cloudflare Worker for Sveltia auth
-```
+Single-page portfolio for a sound designer and composer. Three locales (fr / en / es), auto-detected on first visit. Four switchable visual themes with optional CRT effects (scanlines, glow, chromatic aberration, vignette, flicker).
 
 ## Themes
 
-Two themes, switchable at runtime:
-- **Graphite** — default, carbon/pro-audio-rack vibe
-- **Mahogany** — warm mahogany + brass + teal
+- **Vapor** — default, Steam-inspired dark blue-grey + blue accent
+- **Graphite** — carbon/pro-audio-rack, brass + teal
+- **Mahogany** — warm mahogany + brass
+- **Synthwave** — indigo + magenta + cyan
 
-Dev: press `⌘⇧T` (or `Ctrl⇧T`) or append `?theme=mahogany` / `?theme=graphite` to any URL.
+Switch via the ⚙ panel (bottom-right) or press `⌘⇧T` / `Ctrl⇧T` to cycle.
+
+## Features
+
+- Scroll-reveal animations
+- Media carousel (images + video) per project
+- Music set player with canvas waveform, stereo VU meter (LED dots synced via Web Audio API)
+- Self-hosted audio (peaks generated at build time) + YouTube/SoundCloud embeds
+- 5-layer CRT effect system with per-layer intensity sliders
+- SEO: per-page meta, JSON-LD, hreflang, OG images (auto-generated), sitemap
+- Sveltia CMS at `/admin/` for non-technical content editing
+- CI/CD via GitHub Actions → GitHub Pages
+
+## Links
+
+- [SoundCloud](https://soundcloud.com/user-836588138)
+- [YouTube](https://youtube.com/playlist?list=PLL6AYm1TFMrcIqQv9stuyjAoS_-UK4zD4)
+- [LinkedIn](https://www.linkedin.com/in/quentin-ferreira-castiço)
+- [Malt](https://www.malt.fr/profile/quentinferreiracastico)
 
 ## License
 
