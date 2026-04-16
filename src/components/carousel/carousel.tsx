@@ -39,7 +39,7 @@ const styles = {
 		min-width: 0;
 	`,
 	image: css`
-		object-fit: cover;
+		object-fit: contain;
 		border-radius: 6px;
 		max-height: 400px;
 		width: 100%;
