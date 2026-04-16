@@ -176,8 +176,10 @@ const styles = {
 	`,
 };
 
-/** Strip leading / so <base> tag resolves paths correctly */
-const rel = (path: string) => (path.startsWith("/") ? path.slice(1) : path);
+import { BASE_PATH } from "@/routes";
+
+/** Prefix content paths with BASE_PATH for correct resolution */
+const asset = (path: string) => `${BASE_PATH}${path}`;
 
 const splitTitle = (title: string): { head: string; tail: string } => {
 	const parts = title.trim().split(" ");
@@ -216,7 +218,7 @@ export const LocalePage = ({
 				<div css={styles.heroLayout}>
 					<img
 						css={styles.avatar}
-						src="media/avatar.png"
+						src={asset("/media/avatar.png")}
 						alt="Quentin Ferreira-Castiço"
 						width={220}
 						height={220}
@@ -261,13 +263,13 @@ export const LocalePage = ({
 												VIDEO_EXT.test(src)
 													? {
 															kind: "video" as const,
-															src: rel(src),
+															src: asset(src),
 															title: p.title,
-															poster: rel(p.cover),
+															poster: asset(p.cover),
 														}
 													: {
 															kind: "image" as const,
-															src: rel(src),
+															src: asset(src),
 															alt: p.title,
 														},
 										);
@@ -293,7 +295,7 @@ export const LocalePage = ({
 												(a): a is Extract<AudioSource, { kind: "file" }> =>
 													a.kind === "file",
 											)
-											.map((a) => ({ ...a, src: rel(a.src) }));
+											.map((a) => ({ ...a, src: asset(a.src) }));
 										const embedAudio = p.audio.filter(
 											(a): a is Extract<AudioSource, { kind: "soundcloud" }> =>
 												a.kind === "soundcloud",

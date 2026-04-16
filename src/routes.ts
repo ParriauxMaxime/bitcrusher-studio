@@ -1,10 +1,17 @@
 import { ALL_LOCALES, type LocaleEnum } from "@/content/types";
 
-export const BASE_PATH =
-	typeof window !== "undefined" &&
-	window.location.pathname.startsWith("/bitcrusher-studio")
-		? "/bitcrusher-studio"
-		: "";
+const detectBase = (): string => {
+	if (typeof window !== "undefined") {
+		return window.location.pathname.startsWith("/bitcrusher-studio")
+			? "/bitcrusher-studio"
+			: "";
+	}
+	if (typeof process !== "undefined" && process.env?.BASE_PATH) {
+		return process.env.BASE_PATH;
+	}
+	return "";
+};
+export const BASE_PATH = detectBase();
 
 export const RouteKindEnum = {
 	root_splash: "root_splash",
