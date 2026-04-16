@@ -84,14 +84,14 @@ const hoistHeadTags = (template: string, bodyHtml: string): string => {
 	// <meta .../>, <link .../>, <script type="application/ld+json">...</script>
 	const headTags: string[] = [];
 
-	// All <meta> tags (og:*, twitter:*, description)
-	const metaRe = /<meta\s[^>]*\/>/g;
+	// All <meta> tags (og:*, twitter:*, description) — match with or without self-closing
+	const metaRe = /<meta\s[^>]*\/?>/g;
 	for (const m of bodyHtml.matchAll(metaRe)) {
 		headTags.push(m[0]);
 	}
 
 	// All <link rel="..."> tags (canonical, alternate/hreflang)
-	const linkRe = /<link\s[^>]*\/>/g;
+	const linkRe = /<link\s[^>]*\/?>/g;
 	for (const m of bodyHtml.matchAll(linkRe)) {
 		headTags.push(m[0]);
 	}

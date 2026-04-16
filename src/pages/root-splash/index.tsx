@@ -1,7 +1,11 @@
 import { ALL_LOCALES } from "@/content/types";
 import { BASE_PATH } from "@/routes";
 
-const ogImage = `${typeof window !== "undefined" ? window.location.origin : (process.env.SITE_ORIGIN ?? "https://bitcrusher-studio.com")}${BASE_PATH}/og/default.png`;
+const siteOrigin =
+	typeof window !== "undefined"
+		? `${window.location.origin}${BASE_PATH}`
+		: (process.env.SITE_ORIGIN ?? "https://bitcrusher-studio.com");
+const ogImage = `${siteOrigin}/og/default.png`;
 
 export const RootSplash = () => (
 	<>
