@@ -65,9 +65,7 @@ collections:
 
   - name: projects
     label: Projects
-    i18n: true
-    folder: content/projects
-    path: "{{slug}}"
+    folder: content/projects/fr
     extension: md
     format: frontmatter
     create: true
