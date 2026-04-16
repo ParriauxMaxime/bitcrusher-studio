@@ -94,7 +94,7 @@ const styles = {
 		border-top: 1px dashed ${tokens.surface.border};
 		display: flex;
 		flex-direction: column;
-		gap: 14px;
+		gap: 24px;
 		&:first-of-type {
 			border-top: none;
 			padding-top: 24px;
