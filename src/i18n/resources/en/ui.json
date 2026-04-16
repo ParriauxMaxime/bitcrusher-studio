@@ -1,19 +1,9 @@
 {
 	"common": {
-		"language": "Language",
-		"theme": "Theme",
-		"open_external": "Open externally",
 		"play": "Play",
-		"pause": "Pause",
-		"close": "Close"
-	},
-	"home": {
-		"featured_title": "Featured Works",
-		"view_all": "View all works"
+		"pause": "Pause"
 	},
 	"works": {
-		"title": "Works",
-		"selection": "SELECTION",
 		"empty": "No works yet."
 	}
 }

@@ -1,19 +1,9 @@
 {
 	"common": {
-		"language": "Idioma",
-		"theme": "Tema",
-		"open_external": "Abrir externamente",
 		"play": "Reproducir",
-		"pause": "Pausar",
-		"close": "Cerrar"
-	},
-	"home": {
-		"featured_title": "Trabajos destacados",
-		"view_all": "Ver todos los trabajos"
+		"pause": "Pausar"
 	},
 	"works": {
-		"title": "Trabajos",
-		"selection": "SELECCIÓN",
 		"empty": "Aún no hay trabajos."
 	}
 }
