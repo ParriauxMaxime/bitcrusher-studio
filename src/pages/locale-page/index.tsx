@@ -206,26 +206,22 @@ export const LocalePage = ({
 	return (
 		<>
 			<section css={styles.hero} id="hero">
-				<Reveal>
-					<div css={styles.heroLayout}>
-						<img
-							css={styles.avatar}
-							src="/media/avatar.png"
-							alt="Quentin Ferreira-Castiço"
-							width={220}
-							height={220}
-						/>
-						<div css={styles.heroContent}>
-							<h1 css={styles.brand}>
-								Bitcrusher <em>Studio</em>
-							</h1>
-							<p css={styles.taglineLarge}>{site.seo.tagline}</p>
-						</div>
+				<div css={styles.heroLayout}>
+					<img
+						css={styles.avatar}
+						src="/media/avatar.png"
+						alt="Quentin Ferreira-Castiço"
+						width={220}
+						height={220}
+					/>
+					<div css={styles.heroContent}>
+						<h1 css={styles.brand}>
+							Bitcrusher <em>Studio</em>
+						</h1>
+						<p css={styles.taglineLarge}>{site.seo.tagline}</p>
 					</div>
-				</Reveal>
-				<Reveal delay={1}>
-					<div css={styles.aboutBody}>{about.body}</div>
-				</Reveal>
+				</div>
+				<div css={styles.aboutBody}>{about.body}</div>
 			</section>
 
 			<section css={styles.section} id="works">
