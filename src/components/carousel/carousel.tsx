@@ -5,7 +5,7 @@ import { tokens } from "@/theme/tokens";
 export type CarouselItem =
 	| { kind: "image"; src: string; alt: string }
 	| { kind: "youtube"; url: string; title: string }
-	| { kind: "video"; src: string; title: string };
+	| { kind: "video"; src: string; title: string; poster?: string };
 
 export interface CarouselProps {
 	items: CarouselItem[];
@@ -162,6 +162,7 @@ export const Carousel = ({ items }: CarouselProps) => {
 							<video
 								src={item.src}
 								title={item.title}
+								poster={item.poster}
 								controls
 								preload="metadata"
 								css={styles.image}

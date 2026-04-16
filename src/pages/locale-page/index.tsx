@@ -247,7 +247,12 @@ export const LocalePage = ({
 										const mediaItems: CarouselItem[] = (p.images ?? []).map(
 											(src): CarouselItem =>
 												VIDEO_EXT.test(src)
-													? { kind: "video" as const, src, title: p.title }
+													? {
+															kind: "video" as const,
+															src,
+															title: p.title,
+															poster: p.cover,
+														}
 													: { kind: "image" as const, src, alt: p.title },
 										);
 										const videoItems: CarouselItem[] = p.audio
