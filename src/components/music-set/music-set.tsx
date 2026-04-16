@@ -320,8 +320,8 @@ export const MusicSet = ({ sources }: MusicSetProps) => {
 		for (let i = 16; i < 32; i++) sumR += (data[i] ?? 0) ** 2;
 		const rawL = Math.sqrt(sumL / 16) / 255;
 		const rawR = Math.sqrt(sumR / 16) / 255;
-		const left = Math.min(1, rawL ** 0.65 * 1.2);
-		const right = Math.min(1, rawR ** 0.65 * 1.2);
+		const left = Math.min(1, rawL ** 0.75 * 0.95);
+		const right = Math.min(1, rawR ** 0.75 * 0.95);
 		setVuLevels([left, right]);
 		rafRef.current = requestAnimationFrame(updateVu);
 	}, []);
