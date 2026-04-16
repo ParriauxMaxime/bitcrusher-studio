@@ -81,7 +81,7 @@ collections:
           options: [sound_design, music_composition, mixing, mastering, integration] }
       - { name: tags, widget: list, default: [], i18n: duplicate }
       - { name: cover, widget: image, i18n: duplicate }
-      - { name: images, widget: list, default: [], i18n: duplicate, field: { name: path, widget: image } }
+      - { name: images, widget: list, default: [], i18n: duplicate }
       - { name: audio, widget: list, default: [], i18n: duplicate, fields: [
           { name: kind, widget: select, options: [file, soundcloud, youtube] },
           { name: src, widget: string, required: false },
