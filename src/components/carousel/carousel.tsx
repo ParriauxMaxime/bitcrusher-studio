@@ -200,7 +200,6 @@ export const Carousel = ({ items }: CarouselProps) => {
 						css={[styles.arrowBase, styles.arrowLeft]}
 						onClick={prev}
 						aria-label="Previous slide"
-						disabled={index === 0}
 					>
 						‹
 					</button>
@@ -210,7 +209,6 @@ export const Carousel = ({ items }: CarouselProps) => {
 						css={[styles.arrowBase, styles.arrowRight]}
 						onClick={next}
 						aria-label="Next slide"
-						disabled={index === items.length - 1}
 					>
 						›
 					</button>
