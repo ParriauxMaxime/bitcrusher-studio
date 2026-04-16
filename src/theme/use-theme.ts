@@ -13,7 +13,7 @@ const readTheme = (): ThemeEnum => {
 	) {
 		return fromDom;
 	}
-	return ThemeEnum.graphite;
+	return ThemeEnum.vapor;
 };
 
 const subscribers = new Set<() => void>();

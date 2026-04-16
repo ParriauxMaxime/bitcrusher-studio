@@ -22,10 +22,10 @@ export type CrtState = Record<CrtLayer, number>;
 const STORAGE_PREFIX = "crt-";
 
 const defaultState = (): CrtState => ({
-	scanlines: 0,
-	glow: 0,
-	aberration: 0,
-	vignette: 0,
+	scanlines: 42,
+	glow: 37,
+	aberration: 53,
+	vignette: 65,
 	flicker: 0,
 });
 
