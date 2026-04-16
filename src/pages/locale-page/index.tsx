@@ -54,6 +54,7 @@ const styles = {
 	brand: css`
 		font-family: "Instrument Serif", Georgia, serif;
 		font-style: italic;
+		font-weight: 400;
 		font-size: clamp(48px, 7vw, 100px);
 		color: ${tokens.text.heading};
 		line-height: 1;
@@ -63,7 +64,6 @@ const styles = {
 		em {
 			color: ${tokens.accent};
 			font-style: italic;
-			font-weight: 400;
 		}
 	`,
 	taglineLarge: css`
