@@ -234,7 +234,7 @@ export const LocalePage = ({
 									</h3>
 									<div css={styles.projectMeta}>{metaLabel(p)}</div>
 									<div css={styles.projectBody}>{p.body}</div>
-									{p.images.length > 0 && (
+									{(p.images?.length ?? 0) > 0 && (
 										<div css={styles.imageGallery}>
 											{p.images.map((src) => (
 												<img
