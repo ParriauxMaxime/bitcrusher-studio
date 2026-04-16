@@ -41,7 +41,8 @@ const styles = {
 		border-radius: 50%;
 		border: 1px solid ${tokens.surface.border};
 		@media (max-width: 640px) {
-			width: 180px;
+			width: 65vw;
+			max-width: 260px;
 		}
 	`,
 	heroContent: css`
