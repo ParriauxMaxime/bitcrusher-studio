@@ -23,8 +23,23 @@ const styles = {
 		a {
 			color: ${tokens.text.body};
 			text-decoration: none;
+			position: relative;
+			transition: color 0.2s ease;
+			&::after {
+				content: "";
+				position: absolute;
+				bottom: -2px;
+				left: 0;
+				width: 0;
+				height: 1px;
+				background: ${tokens.accent};
+				transition: width 0.3s ease;
+			}
 			&:hover {
 				color: ${tokens.accent};
+			}
+			&:hover::after {
+				width: 100%;
 			}
 		}
 	`,

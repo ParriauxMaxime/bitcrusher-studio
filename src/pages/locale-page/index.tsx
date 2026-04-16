@@ -148,8 +148,21 @@ const styles = {
 			font-size: 11px;
 			letter-spacing: 0.18em;
 			text-transform: uppercase;
-			border-bottom: 1px solid ${tokens.accent};
 			padding-bottom: 2px;
+			position: relative;
+			&::after {
+				content: "";
+				position: absolute;
+				bottom: 0;
+				left: 0;
+				width: 0;
+				height: 1px;
+				background: ${tokens.accent};
+				transition: width 0.3s ease;
+			}
+			&:hover::after {
+				width: 100%;
+			}
 		}
 	`,
 };
