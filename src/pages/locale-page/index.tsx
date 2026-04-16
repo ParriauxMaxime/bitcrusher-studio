@@ -265,7 +265,9 @@ export const LocalePage = ({
 											);
 										const carouselItems = [...mediaItems, ...videoItems];
 										return carouselItems.length > 0 ? (
-											<Carousel items={carouselItems} />
+											<Reveal delay={2}>
+												<Carousel items={carouselItems} />
+											</Reveal>
 										) : null;
 									})()}
 									{(() => {
@@ -280,7 +282,9 @@ export const LocalePage = ({
 										return (
 											<>
 												{fileAudio.length > 0 && (
-													<MusicSet sources={fileAudio} />
+													<Reveal delay={2}>
+														<MusicSet sources={fileAudio} />
+													</Reveal>
 												)}
 												{embedAudio.map((a) => (
 													<EmbedPlayer key={a.url} source={a} />
