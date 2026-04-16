@@ -59,8 +59,7 @@ const template = (title: string, subtitle: string): string => `
   <rect width="1200" height="630" fill="url(#g)"/>
 
   <!-- Brand (hero style) -->
-  <text x="80" y="260" font-family="Instrument Serif, Georgia, serif" font-style="italic" font-size="120" font-weight="400" fill="#e5e5e5">Bitcrusher</text>
-  <text x="700" y="260" font-family="Instrument Serif, Georgia, serif" font-style="italic" font-size="120" font-weight="400" fill="#66c0f4">Studio</text>
+  <text x="80" y="260" font-family="Instrument Serif, Georgia, serif" font-style="italic" font-size="120" font-weight="400" fill="#e5e5e5">Bitcrusher <tspan fill="#66c0f4">Studio</tspan></text>
 
   <!-- Tagline -->
   <text x="80" y="340" font-family="Inter, sans-serif" font-size="30" fill="#acb2b8">${xmlEscape(subtitle.slice(0, 70))}</text>

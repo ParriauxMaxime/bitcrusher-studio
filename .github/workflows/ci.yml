@@ -49,6 +49,8 @@ jobs:
           node-version: 20
           cache: npm
       - run: npm ci
+      - name: Install OG fonts
+        run: mkdir -p ~/.local/share/fonts && cp scripts/instrument-serif-italic.ttf ~/.local/share/fonts/ && fc-cache -f
       - run: npm run build
         env:
           BASE_PATH: /bitcrusher-studio
