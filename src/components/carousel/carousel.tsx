@@ -1,5 +1,5 @@
 import { css } from "@emotion/react";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { tokens } from "@/theme/tokens";
 
 export type CarouselItem =
@@ -116,7 +116,22 @@ const dotStyle = (active: boolean) => css`
 
 export const Carousel = ({ items }: CarouselProps) => {
 	const [index, setIndex] = useState(0);
+	const containerRef = useRef<HTMLElement>(null);
 	const single = items.length <= 1;
+
+	// biome-ignore lint/correctness/useExhaustiveDependencies: must fire on index change to stop media
+	useEffect(() => {
+		const el = containerRef.current;
+		if (!el) return;
+		const videos = el.querySelectorAll("video");
+		for (const v of videos) v.pause();
+		const iframes = el.querySelectorAll("iframe");
+		for (const f of iframes) {
+			const src = f.getAttribute("src") ?? "";
+			f.setAttribute("src", "");
+			f.setAttribute("src", src);
+		}
+	}, [index]);
 
 	const prev = () => setIndex((i) => (i - 1 + items.length) % items.length);
 	const next = () => setIndex((i) => (i + 1) % items.length);
@@ -135,6 +150,7 @@ export const Carousel = ({ items }: CarouselProps) => {
 
 	return (
 		<section
+			ref={containerRef}
 			css={styles.container}
 			onKeyDown={handleKeyDown}
 			// biome-ignore lint/a11y/noNoninteractiveTabindex: carousel needs keyboard focus for arrow-key navigation
