@@ -68,7 +68,6 @@ collections:
     i18n: true
     folder: content/projects
     path: "{{slug}}"
-    identifier_field: slug
     extension: md
     format: frontmatter
     create: true
