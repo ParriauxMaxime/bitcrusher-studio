@@ -69,31 +69,41 @@ const renderRoute = async (routePath: string): Promise<string> => {
 
 /** Hoist <title> and <meta name="description"> from body HTML into <head>. */
 const hoistHeadTags = (template: string, bodyHtml: string): string => {
-	// Extract <title>…</title>
-	const titleMatch = bodyHtml.match(/<title>([^<]*)<\/title>/);
-	// Extract <meta name="description" content="…"/>
-	const descMatch = bodyHtml.match(
-		/<meta name="description" content="([^"]*)"\s*\/>/,
-	);
-
 	let out = template;
 
+	// Extract and hoist <title>
+	const titleMatch = bodyHtml.match(/<title>([^<]*)<\/title>/);
 	if (titleMatch) {
-		// Replace the placeholder <title> in the template head
 		out = out.replace(
 			/<title>[^<]*<\/title>/,
 			`<title>${titleMatch[1]}</title>`,
 		);
 	}
 
-	if (descMatch) {
-		// Inject description before </head> if not already present
-		if (!out.includes('meta name="description"')) {
-			out = out.replace(
-				"</head>",
-				`<meta name="description" content="${descMatch[1]}" /></head>`,
-			);
-		}
+	// Extract all self-closing tags that belong in <head>:
+	// <meta .../>, <link .../>, <script type="application/ld+json">...</script>
+	const headTags: string[] = [];
+
+	// All <meta> tags (og:*, twitter:*, description)
+	const metaRe = /<meta\s[^>]*\/>/g;
+	for (const m of bodyHtml.matchAll(metaRe)) {
+		headTags.push(m[0]);
+	}
+
+	// All <link rel="..."> tags (canonical, alternate/hreflang)
+	const linkRe = /<link\s[^>]*\/>/g;
+	for (const m of bodyHtml.matchAll(linkRe)) {
+		headTags.push(m[0]);
+	}
+
+	// JSON-LD script blocks
+	const ldRe = /<script type="application\/ld\+json">[^<]*<\/script>/g;
+	for (const m of bodyHtml.matchAll(ldRe)) {
+		headTags.push(m[0]);
+	}
+
+	if (headTags.length > 0) {
+		out = out.replace("</head>", `${headTags.join("\n")}\n</head>`);
 	}
 
 	return out;

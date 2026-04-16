@@ -15,10 +15,11 @@ import { NotFound } from "./pages/not-found";
 import { RootSplash } from "./pages/root-splash";
 import { ROUTES, RouteKindEnum } from "./routes";
 
+const SSR_ORIGIN = process.env.SITE_ORIGIN ?? "https://bitcrusher-studio.com";
 const ORIGIN =
 	typeof window !== "undefined" && window.location.origin
 		? window.location.origin
-		: "https://bitcrusher-studio.com";
+		: SSR_ORIGIN;
 
 const resolveRoute = (rawPath: string) => {
 	const path = rawPath.replace(/\/$/, "") || "/";
