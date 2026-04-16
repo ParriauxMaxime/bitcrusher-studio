@@ -232,7 +232,6 @@ export const LocalePage = ({
 									css={styles.projectArticle}
 								>
 									<Reveal>
-										<div css={styles.projectChannel}>{channelLabel(p)}</div>
 										<h3 css={styles.projectTitle}>
 											{head ? `${head} ` : ""}
 											<em>{tail}</em>

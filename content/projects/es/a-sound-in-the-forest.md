@@ -7,6 +7,8 @@ year: 2024
 roles: [music_composition]
 tags: [móvil, puzzle, onírico]
 cover: /media/projects/a-sound-in-the-forest/cover.jpg
+images:
+  - /media/projects/a-sound-in-the-forest/concept-art.jpg
 audio:
   - kind: file
     src: /media/projects/a-sound-in-the-forest/theme-n1.mp3
