@@ -2,7 +2,6 @@ import { css } from "@emotion/react";
 import type { ReactNode } from "react";
 import { Footer } from "@/components/shell/footer";
 import { SkipLink } from "@/components/shell/skip-link";
-import { ThemeSwitcherDev } from "@/components/theme-switcher-dev/theme-switcher-dev";
 import type { SiteCopy } from "@/content/types";
 import { CrtEffects, CrtVignetteOverlay } from "@/theme/crt-effects";
 import { tokens } from "@/theme/tokens";
@@ -35,6 +34,5 @@ export const Layout = ({ site, children }: LayoutProps) => (
 				url: s.url,
 			}))}
 		/>
-		<ThemeSwitcherDev />
 	</>
 );
