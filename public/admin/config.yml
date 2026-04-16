@@ -73,6 +73,16 @@ collections:
       - { name: title, widget: string }
       - { name: body, widget: markdown }
 
+  - name: pages_test
+    label: Pages Test (debug)
+    folder: content/pages/fr
+    extension: md
+    format: frontmatter
+    create: true
+    fields:
+      - { name: title, widget: string }
+      - { name: body, widget: markdown }
+
   - name: projects_full
     label: Projects (debug)
     folder: content/projects/fr
