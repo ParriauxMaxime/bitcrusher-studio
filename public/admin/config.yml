@@ -65,29 +65,31 @@ collections:
 
   - name: projects
     label: Projects
-    folder: content/projects/fr
+    i18n: true
+    folder: content/projects
+    path: "{{slug}}"
     extension: md
     format: frontmatter
     create: true
     fields:
-      - { name: title, widget: string }
-      - { name: order, widget: number }
-      - { name: featured, widget: boolean, default: false }
-      - { name: year, widget: number }
-      - { name: roles, widget: select, multiple: true,
+      - { name: title, widget: string, i18n: true }
+      - { name: order, widget: number, i18n: duplicate }
+      - { name: featured, widget: boolean, default: false, i18n: duplicate }
+      - { name: year, widget: number, i18n: duplicate }
+      - { name: roles, widget: select, multiple: true, i18n: duplicate,
           options: [sound_design, music_composition, mixing, mastering, integration] }
-      - { name: tags, widget: list, default: [] }
-      - { name: cover, widget: image }
-      - { name: images, widget: list, default: [] }
-      - { name: audio, widget: list, default: [], fields: [
+      - { name: tags, widget: list, default: [], i18n: duplicate }
+      - { name: cover, widget: image, i18n: duplicate }
+      - { name: images, widget: list, default: [], i18n: duplicate }
+      - { name: audio, widget: list, default: [], i18n: duplicate, fields: [
           { name: kind, widget: select, options: [file, soundcloud, youtube] },
           { name: src, widget: string, required: false },
           { name: url, widget: string, required: false },
           { name: title, widget: string }
         ]}
-      - { name: links, widget: list, default: [], fields: [
+      - { name: links, widget: list, default: [], i18n: duplicate, fields: [
           { name: label, widget: string },
           { name: url, widget: string }
         ]}
-      - { name: collaborators, widget: list, default: [] }
-      - { name: body, widget: markdown }
+      - { name: collaborators, widget: list, default: [], i18n: duplicate }
+      - { name: body, widget: markdown, i18n: true }
