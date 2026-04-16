@@ -1,6 +1,8 @@
 import { css } from "@emotion/react";
 import { useTranslation } from "react-i18next";
 import { AudioPlayer } from "@/components/audio-player";
+import type { CarouselItem } from "@/components/carousel/carousel";
+import { Carousel } from "@/components/carousel/carousel";
 import type { LocaleEnum, Page, Project, SiteCopy } from "@/content/types";
 import { tokens } from "@/theme/tokens";
 
@@ -121,21 +123,6 @@ const styles = {
 		white-space: pre-wrap;
 		margin: 4px 0 0;
 	`,
-	imageGallery: css`
-		display: flex;
-		gap: 12px;
-		overflow-x: auto;
-		padding-bottom: 8px;
-		margin-top: 8px;
-		scrollbar-width: thin;
-		img {
-			border-radius: 6px;
-			border: 1px solid ${tokens.surface.border};
-			max-height: 240px;
-			width: auto;
-			flex-shrink: 0;
-		}
-	`,
 	linkList: css`
 		display: flex;
 		gap: 16px;
@@ -235,16 +222,15 @@ export const LocalePage = ({
 									<div css={styles.projectMeta}>{metaLabel(p)}</div>
 									<div css={styles.projectBody}>{p.body}</div>
 									{(p.images?.length ?? 0) > 0 && (
-										<div css={styles.imageGallery}>
-											{p.images.map((src) => (
-												<img
-													key={src}
-													src={src}
-													alt={`${p.title}`}
-													loading="lazy"
-												/>
-											))}
-										</div>
+										<Carousel
+											items={p.images.map(
+												(src): CarouselItem => ({
+													kind: "image" as const,
+													src,
+													alt: p.title,
+												}),
+											)}
+										/>
 									)}
 									{p.audio.length > 0 && <AudioPlayer sources={p.audio} />}
 									{p.links.length > 0 && (
