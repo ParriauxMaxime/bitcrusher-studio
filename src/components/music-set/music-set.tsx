@@ -22,14 +22,14 @@ const styles = {
 		background: rgba(0, 0, 0, 0.2);
 		display: flex;
 		flex-direction: column;
-		max-height: 280px;
+		max-height: 200px;
 		overflow-y: auto;
 	`,
 	trackItem: (active: boolean) => css`
 		display: flex;
 		align-items: center;
-		gap: 10px;
-		padding: 10px 14px;
+		gap: 8px;
+		padding: 7px 12px;
 		cursor: pointer;
 		border: none;
 		background: ${active ? "rgba(0, 0, 0, 0.3)" : "transparent"};
@@ -65,10 +65,10 @@ const styles = {
 	player: css`
 		flex: 1;
 		background: rgba(0, 0, 0, 0.15);
-		padding: 16px;
+		padding: 12px;
 		display: flex;
 		flex-direction: column;
-		gap: 12px;
+		gap: 8px;
 	`,
 	playerTitle: css`
 		font-size: 13px;
@@ -78,15 +78,15 @@ const styles = {
 	controls: css`
 		display: flex;
 		align-items: center;
-		gap: 12px;
+		gap: 8px;
 	`,
 	playBtn: css`
 		background: ${tokens.accent};
 		color: #000;
 		border: none;
 		border-radius: 50%;
-		width: 32px;
-		height: 32px;
+		width: 28px;
+		height: 28px;
 		cursor: pointer;
 		font-size: 12px;
 		display: flex;
@@ -147,7 +147,7 @@ const styles = {
 		flex: 1;
 		display: flex;
 		flex-direction: column;
-		gap: 12px;
+		gap: 6px;
 	`,
 };
 
