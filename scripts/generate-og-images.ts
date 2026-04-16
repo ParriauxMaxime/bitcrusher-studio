@@ -20,9 +20,15 @@ const xmlEscape = (s: string): string =>
 		.replace(/"/g, "&quot;")
 		.replace(/'/g, "&apos;");
 
-const vuLed = (x: number, y: number, color: string, lit: boolean): string =>
+const vuLed = (
+	x: number,
+	y: number,
+	color: string,
+	lit: boolean,
+	id: string,
+): string =>
 	lit
-		? `<circle cx="${x}" cy="${y}" r="14" fill="${color}" opacity="0.08"/><circle cx="${x}" cy="${y}" r="8" fill="${color}" opacity="0.9"/>`
+		? `<defs><radialGradient id="${id}" cx="40%" cy="35%" r="60%"><stop offset="0%" stop-color="white" stop-opacity="0.7"/><stop offset="40%" stop-color="${color}"/><stop offset="100%" stop-color="${color}" stop-opacity="0.4"/></radialGradient></defs><circle cx="${x}" cy="${y}" r="14" fill="${color}" opacity="0.1"/><circle cx="${x}" cy="${y}" r="8" fill="url(#${id})"/>`
 		: `<circle cx="${x}" cy="${y}" r="8" fill="#2a3a4a"/>`;
 
 const vuColumn = (x: number, level: number): string => {
@@ -38,7 +44,7 @@ const vuColumn = (x: number, level: number): string => {
 		"#ff5a4a",
 	];
 	return colors
-		.map((c, i) => vuLed(x, 540 - i * 22, c, i < level))
+		.map((c, i) => vuLed(x, 540 - i * 22, c, i < level, `led${x}-${i}`))
 		.join("\n    ");
 };
 
