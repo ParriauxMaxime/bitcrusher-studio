@@ -21,7 +21,9 @@ const xmlEscape = (s: string): string =>
 		.replace(/'/g, "&apos;");
 
 const vuLed = (x: number, y: number, color: string, lit: boolean): string =>
-	`<circle cx="${x}" cy="${y}" r="8" fill="${lit ? color : "#2a3a4a"}"${lit ? ` opacity="0.9"` : ""}/>`;
+	lit
+		? `<circle cx="${x}" cy="${y}" r="8" fill="${color}" opacity="0.9"/><circle cx="${x}" cy="${y}" r="12" fill="${color}" opacity="0.2"/>`
+		: `<circle cx="${x}" cy="${y}" r="8" fill="#2a3a4a"/>`;
 
 const vuColumn = (x: number, level: number): string => {
 	const colors = [
@@ -62,7 +64,7 @@ const template = (title: string, subtitle: string): string => `
   <defs>
     <pattern id="scanlines" width="4" height="4" patternUnits="userSpaceOnUse">
       <rect width="4" height="2" fill="transparent"/>
-      <rect y="2" width="4" height="2" fill="rgba(0,0,0,0.08)"/>
+      <rect y="2" width="4" height="2" fill="rgba(0,0,0,0.25)"/>
     </pattern>
   </defs>
   <rect width="1200" height="630" fill="url(#scanlines)"/>
@@ -74,12 +76,19 @@ const template = (title: string, subtitle: string): string => `
   </radialGradient>
   <rect width="1200" height="630" fill="url(#vig)"/>
 
+  <!-- Text glow (blurred duplicate behind) -->
+  <filter id="glow">
+    <feGaussianBlur stdDeviation="6" result="blur"/>
+    <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+  </filter>
+
   <!-- Brand (hero style, bigger) -->
+  <text x="80" y="300" font-family="Instrument Serif, Georgia, serif" font-style="italic" font-size="160" font-weight="400" fill="#66c0f4" opacity="0.3" filter="url(#glow)">Bitcrusher Studio</text>
   <text x="80" y="300" font-family="Instrument Serif, Georgia, serif" font-style="italic" font-size="160" font-weight="400" fill="#e5e5e5">Bitcrusher <tspan fill="#66c0f4">Studio</tspan></text>
 
   <!-- Chromatic aberration on brand -->
-  <text x="78" y="300" font-family="Instrument Serif, Georgia, serif" font-style="italic" font-size="160" font-weight="400" fill="rgba(255,90,74,0.15)">Bitcrusher <tspan fill="rgba(255,90,74,0.15)">Studio</tspan></text>
-  <text x="82" y="300" font-family="Instrument Serif, Georgia, serif" font-style="italic" font-size="160" font-weight="400" fill="rgba(102,192,244,0.15)">Bitcrusher <tspan fill="rgba(102,192,244,0.15)">Studio</tspan></text>
+  <text x="77" y="300" font-family="Instrument Serif, Georgia, serif" font-style="italic" font-size="160" font-weight="400" fill="rgba(255,90,74,0.12)">Bitcrusher Studio</text>
+  <text x="83" y="300" font-family="Instrument Serif, Georgia, serif" font-style="italic" font-size="160" font-weight="400" fill="rgba(102,192,244,0.12)">Bitcrusher Studio</text>
 
   <!-- Tagline -->
   <text x="80" y="400" font-family="Inter, sans-serif" font-size="36" fill="#acb2b8">${xmlEscape(subtitle.slice(0, 70))}</text>
