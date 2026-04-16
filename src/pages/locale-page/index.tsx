@@ -121,6 +121,21 @@ const styles = {
 		white-space: pre-wrap;
 		margin: 4px 0 0;
 	`,
+	imageGallery: css`
+		display: flex;
+		gap: 12px;
+		overflow-x: auto;
+		padding-bottom: 8px;
+		margin-top: 8px;
+		scrollbar-width: thin;
+		img {
+			border-radius: 6px;
+			border: 1px solid ${tokens.surface.border};
+			max-height: 240px;
+			width: auto;
+			flex-shrink: 0;
+		}
+	`,
 	linkList: css`
 		display: flex;
 		gap: 16px;
@@ -219,6 +234,18 @@ export const LocalePage = ({
 									</h3>
 									<div css={styles.projectMeta}>{metaLabel(p)}</div>
 									<div css={styles.projectBody}>{p.body}</div>
+									{p.images.length > 0 && (
+										<div css={styles.imageGallery}>
+											{p.images.map((src) => (
+												<img
+													key={src}
+													src={src}
+													alt={`${p.title}`}
+													loading="lazy"
+												/>
+											))}
+										</div>
+									)}
 									{p.audio.length > 0 && <AudioPlayer sources={p.audio} />}
 									{p.links.length > 0 && (
 										<div css={styles.linkList}>

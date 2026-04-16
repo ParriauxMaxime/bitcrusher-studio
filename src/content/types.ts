@@ -58,6 +58,7 @@ export const ProjectFrontmatterSchema = z.object({
 	roles: z.array(z.nativeEnum(ProjectRoleEnum)).min(1),
 	tags: z.array(z.string()).default([]),
 	cover: z.string().startsWith("/media/"),
+	images: z.array(z.string().startsWith("/media/")).default([]),
 	audio: z.array(AudioSourceSchema).default([]),
 	links: z.array(ProjectLinkSchema).default([]),
 	collaborators: z.array(z.string()).default([]),

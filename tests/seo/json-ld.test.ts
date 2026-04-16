@@ -30,6 +30,7 @@ describe("json-ld builders", () => {
 			roles: ["sound_design"],
 			tags: [],
 			cover: "/media/projects/space-piercer/cover.jpg",
+			images: [],
 			audio: [],
 			links: [],
 			collaborators: [],
